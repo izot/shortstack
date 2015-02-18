@@ -1,0 +1,3 @@
+#!/bin/sh
+NaturalDocs -i ../api -o HTML api -p ../.naturalDocs/api
+
