@@ -1,0 +1,861 @@
+Neuron Linker Version 5.40.02 Copyright (c) Echelon Corporation 1992-2014
+Linked at Mon Feb 09 07:36:13 2015
+C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.nxr
+
+                       LIST OF MEMORY AREAS
+
+  * AREA *                    * ALLOCATED *         * UNUSED *
+                             From  To   Len       From  To   Len
+
+SYSTEM IMAGE ROM             0000 3FFF 4000        - RESERVED - 
+
+OffChip NVRAM  (EECODE)      4000 49FF 0A00       4988 49FF 0078
+OffChip NVRAM  (Pool)         - AVAILABLE -       4A00 9FFF 5600
+
+OffChip RAM    (System)      CF00 DE65 0F66          - NONE -   
+OffChip RAM    (DATA)         - AVAILABLE -       DE66 DEFF 009A
+OffChip RAM    (Pool)         - AVAILABLE -       DF00 E6FF 0800
+OffChip RAMNEAR              E700 E7FF 0100       E700 E7F7 00F8
+
+OnChip  RAM    (System)      E800 EFC6 07C7          - NONE -   
+OnChip  RAM    (System)         - WASTE -         EFC7 EFFF 0039
+
+OnChip  EEPROM (Prolog)      F000 F02D 002E          - NONE -   
+OnChip  EEPROM (Config)      F02E F5A6 0579          - NONE -   
+OnChip  EECODE               F5A7 F5A8 0002       F5A7 F5A8 0002
+OnChip  EEPROM (MemCtl)      F5A9 F5B6 000E          - NONE -   
+OnChip  EEPROM (Pool)         - AVAILABLE -       F5B7 F7E6 0230
+OnChip  EENEAR               F7E7 F7FE 0018       F7E7 F7E8 0002
+OnChip  EEPROM (Epilog)      F7FF F7FF 0001          - NONE -   
+Transient      (Table)   000000 000000 000000        - NONE -   
+Transient      (Code)    000000 000000 000000        - NONE -   
+
+End of Memory Area List
+
+Link Memory Usage Statistics:
+
+EEPROM Usage:  (not necessarily in order of physical layout)
+               (includes application use of external NVRAM)
+        System Data and Parameters          89 bytes
+        Domain and Address Tables          105 bytes
+        Network Variable Config Tables    1270 bytes
+        Onchip Data Area Fragmentation       2 bytes
+        Application EEPROM Variables         0 bytes
+        Library EEPROM Variables            22 bytes
+        Application Code and Const Data     30 bytes
+        Library Code and Const Data       2408 bytes
+                                         -----
+        Total EEPROM Requirement          3926 bytes
+        Remaining EEPROM                 22698 bytes
+
+RAM Usage:      (not necessarily in order of physical layout)
+        System Data and Parameters         701 bytes
+        Transaction Control Blocks         264 bytes
+        Appl Timers and I/O Change Events    4 bytes
+        Network and Application Buffers   4964 bytes
+        System RAM Fragmentation            57 bytes
+        Application RAM Variables            0 bytes
+        Library RAM Variables                8 bytes
+                                         -----
+        Total RAM Requirement             5998 bytes
+        Remaining RAM                     2450 bytes
+
+Transient Code Usage:
+        Transient code                       0 functions
+        Transient code for functions         0 bytes
+        Transient code table                 0 bytes
+                                         -----
+        Total transient data                 0 bytes
+
+Successfully linked for FT 5000.
+        System RAM Fragmentation (57 bytes) is specific to
+                system use of external RAM.
+        Memory Map (9 bytes of System EEPROM) supports extended memory.
+                This amount varies by the firmware version.
+        Extended Version Number (4 bytes) varies by firmware version.
+        Onchip EEPROM Data Fragmentation (2 bytes) varies by Neuron model.
+        System Upper EEPROM Area (1 byte) varies by firmware version.
+        16 receive transaction blocks require 16 * 13 = 208 bytes.
+        28 bytes for non-priority transmit transaction control blocks
+        28 bytes for priority transmit transaction control blocks
+        Priority outgoing message transaction control block uses 28 bytes of RAM.
+                Of this amount, 10 bytes varies by firmware version.
+        Some system RAM usage, for System Data and Transaction Blocks
+                (totaling 439 bytes) varies by the Neuron model, the
+                firmware version, and the number of receive
+                transaction control blocks.
+        NVRAM Signature  = 0000 @ 4000 .. 4001
+
+Buffer Configuration Summary:
+
+        Application input buffers: 7 at 146 bytes
+        Application output buffers: 7 (normal) + 3 (prio) at 146 bytes
+        Network input buffers: 7 at 146 bytes
+        Network output buffers: 7 (normal) + 3 (prio) at 146 bytes
+
+System Configuration Summary:
+
+        Domains: 2 at 15 bytes each
+        Addresses: 15 at 5 bytes each
+        Aliases: 127 at 4 bytes each
+
+
+End of Link Statistics
+                             LIST OF SEGMENTS
+
+ * FILE *                        * ROM *           * RAM *         * NVRAM *
+ Type Name                   From  To   Len    From  To   Len    From  To   Len
+
+C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.no:
+  Rel * Unnamed *             --   --   --      --   --   --     F024 F028 0005
+  Rel * Unnamed *             --   --   --      --   --   --     F029 F02D 0005
+  Rel %key                    --   --   --      --   --   --     4002 4003 0002
+  Rel %appVersion             --   --   --      --   --   --     4004 4006 0003
+  Rel APINIT                  --   --   --      --   --   --     4007 4011 000B
+  Rel TEVT                    --   --   --      --   --   --     4012 4019 0008
+  Rel _%_MICROSERVER%INIT     --   --   --      --   --   --     401A 401F 0006
+  Rel * Unnamed *             --   --   --      --   --   --     F02E F5A6 0579
+  Rel * Unnamed *             --   --   --      --   --   --     0000 0000 0001
+  Abs * Unnamed *             --   --   --      --   --   --     F000 F023 0024
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_MIPS20):
+  Rel get_bitrate_id          --   --   --      --   --   --     4020 406E 004F
+  Rel is_eat_supported        --   --   --      --   --   --     406F 4082 0014
+  Rel handle_incoming_messa   --   --   --      --   --   --     4083 4120 009E
+  Rel handle_incoming_respo   --   --   --      --   --   --     4121 4135 0015
+  Rel convert_incoming_to_r   --   --   --      --   --   --     4136 4146 0011
+  Rel save_neuron_c_env       --   --   --      --   --   --     4147 4167 0021
+  Rel enter_flush_state       --   --   --      --   --   --     4168 416C 0005
+  Rel handle_error            --   --   --      --   --   --     416D 4182 0016
+  Rel set_sisd_invalid        --   --   --      --   --   --     4183 4192 0010
+  Rel %MicroServer            --   --   --      --   --   --     4193 41E3 0051
+  Rel microServerAllocLocal   --   --   --      --   --   --     41E4 41F4 0011
+  Rel microServerCore         --   --   --      --   --   --     41F5 42D7 00E3
+  Rel check_incoming_queues   --   --   --      --   --   --     42D8 42E8 0011
+  Rel do_command_in_process   --   --   --      --   --   --     42E9 45DD 02F5
+  Rel process_nv_init         --   --   --      --   --   --     45DE 469C 00BF
+  Rel update_ram_pointers     --   --   --      --   --   --     469D 46A6 000A
+  Rel update_checksum         --   --   --      --   --   --     46A7 46B0 000A
+  Rel reinit_alias_table      --   --   --      --   --   --     46B1 46E2 0032
+  Rel sp_state                --   --   --     E7F8 E7FF 0008     --   --   -- 
+  Rel shortstack_version      --   --   --      --   --   --     F7F9 F7FE 0006
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_FSIO):
+  Rel _fast_serial_input_SC   --   --   --      --   --   --     46E3 4737 0055
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_SCIPAD):
+  Rel _fast_serial_input_SC   --   --   --      --   --   --     4738 47C4 008D
+  Rel SCI_input_pad1          --   --   --      --   --   --     F7E9 F7F8 0010
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_HDMSPI):
+  Rel _fast_serial_input_SP   --   --   --      --   --   --     47C5 4832 006E
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_SPIPAD):
+  Rel _fast_serial_input_SP   --   --   --      --   --   --     4833 48F6 00C4
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(L_MIP):
+  Rel _mip_IF2                --   --   --      --   --   --     48F7 492E 0038
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_DIAG):
+  Rel retrieve_status         --   --   --      --   --   --     492F 4939 000B
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_MISC1):
+  Rel go_configured           --   --   --      --   --   --     493A 494B 0012
+
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430.LIB(V4_30_0):
+  Rel %usVersion              --   --   --      --   --   --     494C 494F 0004
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_ACCES8):
+  Rel update_alias            --   --   --      --   --   --     4950 4957 0008
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_ACCES7):
+  Rel access_alias            --   --   --      --   --   --     4958 4960 0009
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_ACCES3):
+  Rel update_config_data      --   --   --      --   --   --     4961 4979 0019
+
+C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\GEN.LIB(L_ACCESS):
+  Rel access_domain           --   --   --      --   --   --     497A 4987 000E
+                           SYMBOLS BY ADDRESS
+
+#   0001 _idem_dup                      #   0403 _timer_sset_repeat             
+#   0002 _tx_by_addr                    #   0418 _timer_get                     
+#   0005 _larva_break                   #   041F timers_off                     
+#   0009 _larva_suspend                 #   0429 _unpack_nibs                   
+#   000D _push1                         #   0432 _memcpy                        
+#   000F _push                          #   0435 _memcpy1                       
+#   0013 _pop1                          #   043D _memset8                       
+#   0015 _pop                           #   0444 _memset                        
+#   0019 _alloc                         #   0445 _memset1                       
+#   001E _dealloc                       #   044E _save_ptrs                     
+#   0020 _drop_n                        #   0457 _restore_ptrs                  
+#   0024 _drop_n_return_1               #   045F _register_call                 
+#   0026 _drop_n_preserve_1             #   0465 _add_8_16                      
+#   002A _drop_n_return_2               #   04B0 delay_1msec                    
+#   002C _drop_n_preserve_2             #   04B6 msec_delay                     
+#   003E _get_sp                        #   04B9 delay                          
+#   0040 _query_stats                   #   04BB scaled_delay                   
+#   0046 _bump_ptr                      #   04C4 _iteration16                   
+#   0046 _add_8_16f                     #   04F2 flush_cancel                   
+#   0048 _inc16                         #   04F4 _sys_flag_clear                
+#   004B _xch_inc_xch                   #   04F7 _free_rcvtx_by_domain          
+#   004E _sign_extend16                 #   0502 _sys_flag_set                  
+#   0054 _dec16                         #   0521 _mip_L4                        
+#   005B _ldP0_fetchl                   #   0522 _mip_L5                        
+#   007B watchdog_update                #   0546 _mip_L1                        
+#   007D watchdog_update_old            #   0567 _mip_L2                        
+#   0080 _new_binding_constraints       #   057A _set_typeout                   
+#   0081 _cpu_halt_check                #   059F _mip_T1                        
+#   0086 _larva_L1                      #   05D5 _get_address                   
+#   0093 _larva_L2                      #   05F4 _get_domain                    
+#   00AF _node_reset                    #   0674 _memcmp1                       
+#   00AF node_reset                     #   068B _index_to_addr                 
+#   00BE _arb_presf                     #   0693 _eeprom_write                  
+#   00BF _r_shift8_7                    #   0695 _eeprom_far_write              
+#   00C0 _r_shift8_6                    #   0695 _ee_write_int                  
+#   00C1 _r_shift8_5                    #   0698 _eeprom_write_long             
+#   00C2 _r_shift8_4                    #   069A _eeprom_far_write_long         
+#   00C3 _r_shift8_3                    #   069A _ee_write_long                 
+#   0191 _mip_L6                        #   06A8 _ee_memcpy_uncond              
+#   0348 _timer_update                  #   06AC _ee_memcpy                     
+#   0378 _app_watchdog                  #   06AC _memcpy8                       
+#   0381 _rel_sem2                      #   06AF _get_error_log                 
+#   0386 _get_sem2                      #   06BC _sys_error_log                 
+#   03C4 _timer_events                  #   06BF error_log                      
+#   03E4 _timer_expires                 #   06D0 _raw_error_log                 
+#   03F1 _timer_expires_any             #   071E _change_state                  
+#   03F4 _timer_off                     #   074F _disable_callbacks             
+#   03F8 _timer_mset                    #   0752 _enable_callbacks              
+#   03FA _timer_mset_repeat             #   075E _check_configured              
+#   03FF _timer_sset                    #   07CF _adjust_checksum1              
+#   07EA _get_appsum_location           #   0B82 _equal8                        
+#   08FA post_events                    #   0B84 _equal16                       
+#   0919 set_eeprom_lock                #   0B86 _lognot16                      
+#   0A28 abs8_twice                     #   0B87 _lognot8                       
+#   0A2F _lshift8by2_add16              #   0B89 _log16                         
+#   0A31 _lshift8by1_add16              #   0B8A _log8                          
+#   0A33 _lshift8_add16                 #   0B8F _r_shift8                      
+#   0A35 _lshift16_add16                #   0B97 _r_shift8s                     
+#   0A38 _adds_8_16                     #   0BA0 _l_shift8                      
+#   0A3A _add16                         #   0BA0 _l_shift8s                     
+#   0A41 _mul8l                         #   0BBB _l_shift16s                    
+#   0A43 _muls_8_16                     #   0BBB _l_shift16                     
+#   0A46 _mul_8_16                      #   0BC7 _r_shift16                     
+#   0A48 _mul16s                        #   0BD6 _r_shift16s                    
+#   0A48 _mul16                         #   0BE5 _l_shift8_7                    
+#   0A59 _mul8                          #   0BE6 _l_shift8_6                    
+#   0A62 _div32_16_core                 #   0BE7 _l_shift8_5                    
+#   0A98 _div32_16                      #   0BE8 _l_shift8_4                    
+#   0A9D _div8                          #   0BE9 _l_shift8_3                    
+#   0AA5 _div16                         #   0BED random                         
+#   0AB7 _div8s                         #   0BF1 _msg_free                      
+#   0ABF _mod8s                         #   0BFE _resp_free                     
+#   0AC9 _abs8                          #   0C0B _clear_apps_flags              
+#   0AD0 _mod16                         #   0C0F _msg_alloc_priority            
+#   0AD7 _div16s                        #   0C11 _msg_alloc                     
+#   0AE2 _mod16s                        #   0C21 _resp_alloc                    
+#   0AF0 _max8                          #   0C40 _resp_send                     
+#   0AF5 _min8                          #   0C40 _msg_send                      
+#   0AFA _max8s                         #   0C71 _msg_alloc_wait                
+#   0AFF _min8s                         #   0C7E _resp_cancel                   
+#   0B05 _mod8                          #   0C7E _msg_cancel                    
+#   0B0E _max16                         #   0CA0 _bound_mt                      
+#   0B13 _min16                         #   0CC5 _wink                          
+#   0B18 _max16s                        #   0CC8 _msg_receive                   
+#   0B1D _min16s                        #   0CCA _msg_arrives                   
+#   0B25 _sub16                         #   0CCC _msg_code_arrives              
+#   0B31 _mul8ls                        #   0CDB _set_apps_flags                
+#   0B3A _abs16                         #   0CDF _msg_fails                     
+#   0B3E _minus16s                      #   0CE2 _msg_completes                 
+#   0B44 _not16                         #   0CE5 _msg_succeeds                  
+#   0B49 _and16                         #   0CE8 _resp_receive                  
+#   0B4E _or16                          #   0CEC _resp_arrives                  
+#   0B53 _xor16                         #   0D26 _msg_data_blockset             
+#   0B58 _gequ8s                        #   0D63 _msg_priority_set              
+#   0B5E _gequ16s                       #   0D6E _resp_code_set                 
+#   0B65 _less16                        #   0D70 _resp_data_set                 
+#   0B69 _less8                         #   0D78 _msg_code_set                  
+#   0B6D _signs_differ16                #   0D7A _msg_data_set                  
+#   0B73 _gequ16                        #   0D8B _msg_auth_set                  
+#   0B77 _gequ8                         #   0D8F _msg_service_set               
+#   0B7C _less8s                        #   0D93 _msg_tag_set                   
+#   0B7F _less16s                       #   0D93 _msg_tag_set1                  
+#   0D98 _msg_byte_set                  #   164D _nv_count                      
+#   0D98 _msg_addr_set                  #   1651 _nv_get_cnfg_p_pri             
+#   0D9C _msg_out_set                   #   165E _nv_get_cnfg_p                 
+#   0DCA _msg_code_get                  #   166A _nv_get_cnfg_p1                
+#   0DCA _msg_code_get_ex               #   1672 _nv_get_alias_p                
+#   0DCC _msg_data_get                  #   1688 _nv_get_fixed_p                
+#   0DD0 _msg_auth_get                  #   1830 _get_auth_std                  
+#   0DD4 _msg_service_get               #   1875 _get_rcvtx_p                   
+#   0DD9 _msg_byte_get                  #   1904 _nm_set_nk                     
+#   0DD9 _msg_addr_get                  #   19D8 make_apdu_p                    
+#   0DDE _msg_in_get                    #   19F2 _service_pin_send              
+#   0E0D _msg_len_get_ex                #   19F3 _nm_service_send               
+#   0E0D _msg_len_get                   #   19FA _bitshift_input                
+#   0E12 _msg_data_blockget             #   1A1B _init_baud                     
+#   0F4B _nv_update_int                 #   1A1F _A_delay_pd                    
+#   0F4C _nv_update_int_offset          #   1A21 _A_delay                       
+#   0F51 _nv_update_long                #   1A22 _A_delay_b                     
+#   0F52 _nv_update_long_offset         #   1A28 _sio_load_delay                
+#   0F57 _nv_update                     #   1A31 set_base2p                     
+#   0F5C _nv_update_request             #   1A36 set_base_p                     
+#   0F5C _nv_update_request1            #   1A3B _bit_input                     
+#   0F5C _nv_poll                       #   1A3D _nibble_input                  
+#   0F6C _nv_poll_all                   #   1A51 _byte_input                    
+#   0F72 _nv_array_poll                 #   1A55 _leveldetect_input             
+#   0FAC _nv_update_occurs              #   1A6B _init_io_pins                  
+#   0FAD _nv_array_update_occurs        #   1A97 _io_direction_hi2              
+#   0FF7 _nv_update_fails               #   1A97 _io_direction_hi               
+#   0FF8 _nv_array_update_fails         #   1A99 _io_direction_lo               
+#   0FFD _nv_update_succeeds            #   1A9B _bit_output_ext                
+#   0FFE _nv_array_update_succeeds      #   1A9B _bit_output_ext2               
+#   1001 _nv_update_completes           #   1A9F _bit_output_hi                 
+#   1002 _nv_array_update_completes     #   1AA1 _bit_output_lo2                
+#   1012 _bound_nv                      #   1AA3 _bit_output_lo1                
+#   1012 _bound_nv1                     #   1AAB _nibble_output                 
+#   102B _io_change_init                #   1AB3 _byte_output                   
+#   104B _io_changes_to                 #   1AC7 _set_tco_p                     
+#   1056 _io_changes_by                 #   1ADA _loader_prep                   
+#   106A _io_changes                    #   1B07 _pulsewidth_output             
+#   106F _io_update_occurs              #   1B13 _frequency_output              
+#   1085 _io_input_value                #   1B13 _triggered_count_output        
+#   108C application_restart            #   1B2B _oneshot_output                
+#   10AE _preempt                       #   1B30 _triac_pulse_output            
+#   10E3 offline_confirm                #   1B38 _triac_output                  
+#   10F1 _offline                       #   1B38 _triac_level_output            
+#   10FF _online                        #   1B3A _loader_go                     
+#   1104 online_confirm                 #   1B45 _pulsecount_output             
+#   1141 go_offline                     #   1B87 _totalize_input                
+#   1146 flush                          #   1B93 _ontime_input                  
+#   1151 _flush_completes               #   1B93 _period_input                  
+#   1183 _sleep                         #   1B93 _pulsecount_input              
+#   1198 retrieve_xcvr_status           #   1BC1 _quadrature_input              
+#   1649 _alias_count                   #   1BEC _select_mux                    
+#   1BF0 _alter_icntrl_g                #   34FB _bitshift_setup                
+#   1BF8 _select_input_fn               #   352A _get_si_data_ptr               
+#   1C17 _io_set_clock                  #   362C siuspi_init                    
+#   1C29 _init_timer_counter1           #   363D siu_writeloop                  
+#   1C2B _init_timer_counter2           #   364D siuspi_cmp_a3                  
+#   1C78 _parallel_output_request       #   364F siuspi_read_a3                 
+#   1C7A clear_pio_request              #   3651 siuspi_read_a3nc               
+#   1C7F _parallel_input_ready          #   3675 siuspi_idlewait                
+#   1CAB _parallel_output_ready         #   3680 siuspi_idledecs                
+#   1CB9 _parallel_input                #   3686 siuspi_initw3                  
+#   1CCC _parallel_output               #   3688 siuspi_write3                  
+#   1E2B _mac_L1                        #   3692 siuspi_initw4                  
+#   2104 _scheduler_loop                #   3694 siuspi_write4                  
+#   235C _larva_L3                      #   3699 siuspi_wren                    
+#   26B0 _net_mgmt_processing           #   369A siuspi_inst1                   
+#   2740 _update_address                #   36C7 siuspi_rdsr                    
+#   27A0 _self_installation             #   36DF crc16_ccitt                    
+#   27A2 _calculate_cnfg_checksum       #   3981 _pushd1                        
+#   27AA _leave_indexed_domain          #   3983 _pushd                         
+#   282D chksum_recalc_mode             #   3989 _popd1                         
+#   2BA6 _build_status                  #   398B _popd                          
+#   2C21 clear_status                   #   3991 preemption_mode                
+#   2D15 _get_prit_p                    #   3999 _nv_update_request_all         
+#   2D24 _get_prt_p                     #   399F _nv_array_update_request       
+#   3008 _set_ram_ptrs                  #   39B0 service_pin_msg_send           
+#   305E _checksum_generate             #   39BB service_pin_state              
+#   3259 set_irq_debugging              #   39C4 muldiv24                       
+#   32DF io_set_isr                     #   39FD muldiv24s                      
+#   32FE io_idis                        #   3A13 crc16                          
+#   3300 io_iena                        #   3A32 crc8                           
+#   3307 io_mask_isr                    #   3A46 _neurowire_inv_master          
+#   331A io_itc_cond                    #   3A81 _muxbus_read                   
+#   331F io_itc_clear                   #   3A93 _muxbus_reread                 
+#   3324 io_iaccess                     #   3A9E _muxbus_write                  
+#   3335 io_irelease                    #   3AAD _muxbus_rewrite                
+#   333A io_iperiod                     #   3AB8 _dualslope_input               
+#   336D _io_sci_parity                 #   3AD9 _dualslope_start               
+#   3377 _io_scispi_output_ready        #   3AE5 _edgelog_input                 
+#   3380 _io_scispi_input_ready         #   3B20 _io_set_clock_x2               
+#   3384 _io_sci_get_error              #   3B28 io_edgelog_preload             
+#   3387 _io_spi_get_error              #   3B37 %fl_cmp                        
+#   3392 _io_spi_init                   #   3B69 %fl_eq                         
+#   33AA _io_spi_clock                  #   3B6B %fl_gt                         
+#   33C9 _io_scispi_abort               #   3B6D %fl_lt                         
+#   33D7 _io_sci_init                   #   3B73 %fl_ne                         
+#   33E9 _io_sci_baud                   #   3B75 %fl_ge                         
+#   3404 _io_sci_set_buffer_in          #   3B78 %fl_le                         
+#   3408 _io_sci_set_buffer_out         #   3B80 %fl_zero                       
+#   343A _io_spi_set_buffer             #   3B84 %fl_sub                        
+#   34B3 _eefar_init                    #   3B8F %fl_add                        
+#   34BC _extended_version_number       #   3CD8 %fl_mul                        
+#   34C2 _bitshift_output               #   3D47 %fl_div                        
+#   3E21 %ump_cmp                       .   42E9 do_command_in_processing       
+#   3E39 %fl_neg                        .   42F8 check_for_nv                   
+#   3E49 %fl_copy                       .   4327 check_reset                    
+#   3E4B %fl_copy1                      .   433A check_offline                  
+#   3E5C %fl_arg2_zero                  .   434F do_flush_cancel                
+#   3E5E %fl_arg3_zero                  .   435A check_isi_downlink             
+#   3E6F %fl_compare_exp                .   4360 isi_rpc_call                   
+#   3E7C %fl_adjust_exp                 .   4371 isi_dealloc_buffer             
+#   3E94 %fl_setup                      .   43D8 application_change             
+#   3EFC %fl_finish                     .   43DE process_appinit_misc           
+#   3FFF _image_end                     .   43FA write_nv_count                 
+#   4000 _extended_start                .   4419 write_rods1_nv_count           
+#   4002 %key                           .   4424 recalc_nv_fixed                
+#   4004 %appVersion                    .   4451 write_comm_para                
+.   4007 APINIT                         .   4464 write_program_id               
+.   400A RESET                          .   4474 write_app_signature            
+.   4012 TEVT                           .   4483 process_appinit_done           
+.   401A _%_MICROSERVER%INIT            .   4487 check_appinit_done             
+.   401F _%_MICROSERVER%INITV           .   4487 check_usop                     
+.   4020 get_bitrate_id                 .   456D check_nv_init                  
+.   402A _fast_serial_input             .   456D usop_done                      
+.   402B _fast_serial_input2            .   4573 send_explicit_message          
+.   4041 _fast_serial_output2_wait      .   45A0 process_packet                 
+.   4042 _fast_serial_output_wait       .   45DE process_nv_init                
+.   4048 _fast_serial_output            .   463F nvinit_this_nv                 
+.   4049 _fast_serial_output2           .   467B nvinit_done_this               
+.   405F check_host_busy                .   4699 nvinit_cleanup                 
+.   405F check_host_ready               .   469D update_ram_pointers            
+.   406F is_eat_supported               .   46A7 update_checksum                
+.   4075 get_address_count              .   46B1 reinit_alias_table             
+.   4083 handle_incoming_message        #   46E3 _fast_serial_input_SCI         
+.   40FF process_ul_msg_done            #   46E4 _fast_serial_input2_SCI        
+.   4101 process_ul_nv                  #   4716 _fast_serial_output_SCI        
+.   4118 send_sicb_ul                   #   4717 _fast_serial_output2_SCI       
+.   411B free_incoming_app_buf          #   4738 _fast_serial_input_SCI_pad     
+.   4121 handle_incoming_response       #   4739 _fast_serial_input2_SCI_pad    
+.   4136 convert_incoming_to_response   #   4785 delay_22n_cycles               
+.   4147 save_neuron_c_env              #   478E delay_11n_cycles               
+.   4155 restore_neuron_c_env           #   4794 _fast_serial_output_SCI_pad    
+.   4168 enter_flush_state              #   4795 _fast_serial_output2_SCI_pad   
+.   416D handle_error                   #   47C5 _fast_serial_input_SPI         
+.   4183 set_sisd_invalid               #   47C6 _fast_serial_input2_SPI        
+.   418C set_sisd_valid                 #   4801 _fast_serial_output_SPI        
+#   4193 %MicroServer                   #   4802 _fast_serial_output2_SPI       
+#   4193 %mip_s23_interface             #   4833 _fast_serial_input_SPI_pad     
+.   41DF main_loop                      #   4834 _fast_serial_input2_SPI_pad    
+.   41E4 microServerAllocLocals2        #   48A5 _fast_serial_output_SPI_pad    
+.   41F5 microServerCore                #   48A6 _fast_serial_output2_SPI_pad   
+.   423C uplink_reset                   .   48F7 _mip_outgoing_l5               
+.   42B7 check_local_done               #   48F7 _mip_IF2                       
+.   42D0 check_wdt                      .   48F7 _smip_system_image             
+.   42D8 check_incoming_queues          .   48F7 _mip_outgoing                  
+.   48FE _mip_incoming_l5               c   8001 _extended_io_count             
+#   48FE _mip_IF1                       c   8001 _eevar_offset                  
+.   48FE _mip_incoming                  #   8001 _supports_explicit_addressing  
+#   491A _mip_IF3                       c   8001 _feature_set_1                 
+.   491A _mip_alloc                     #   8002 _nm_version                    
+.   491A _mip_alloc_l5                  c   8002 _read_only_data_struct_version 
+.   492A _mip_free                      #   8002 _min_context4_multiplier       
+#   492A _mip_IF4                       c   8003 _size_io_change_event          
+#   492B _mip_IF5                       c   8003 _size_nv_cnfg                  
+.   492B _mip_cancel                    c   8003 _size_nv_fix                   
+.   492E _mip_set_mode                  c   8003 _extended_onchip_eedata        
+#   492E _mip_IF7                       #   8003 _sci_spi_features              
+#   492F retrieve_status                c   8004 _size_nv_alias                 
+#   493A go_configured                  c   8004 _size_timer                    
+#   493E go_unconfigured                c   8004 _size_evn                      
+#   494C %usVersion                     c   8005 _size_addr_tbl_entry           
+#   4950 update_alias                   #   8008 _build_number                  
+#   4958 access_alias                   c   800C _size_proxy_route_entry        
+#   4961 update_config_data             c   800D _size_rcv_tx                   
+#   4968 _update_record                 c   800F _size_domain_entry             
+#   497A access_domain                  c   8010 _evn_byte_3                    
+#   497E _access_check                  c   8013 _system_version                
+c   8000 _size_sys_ramvars              c   8013 _evn_byte_4                    
+c   8000 _size_sys_eevars               c   801C _size_tx_ctl_blk               
+#   8000 _system_version_minor          #   8031 _nm_capabilities               
+#   8000 __max_transient_app            c   80BE _arbitrary_preempt_safe        
+c   8000 _evn_byte_1                    #   80FF _nv_count_mask                 
+c   8000 _larva_clear_off               #   80FF _nv_all                        
+#   8000 __num_transient_app            #   8100 _size_app_basepg               
+c   8000 _disable_dynamic_xcvr_config   #   811F _interrupt_capability          
+c   8000 _evn_byte_2                    c   82BD _sysram_base_usage             
+c   8000 _sidata_last_eecode            .   E7F8 sp_state                       
+c   8000 _programmable_lvi              .   E7F9 serial_interface_type          
+c   8000 _extended_onchip_eeprom        .   E7FA neuron_c_env                   
+c   8000 _sio_near                      .   E7FE loc_hi                         
+#   8000 _programmable_driver_strength  .   E7FF loc_lo                         
+c   8000 _feature_set_2                 #   E800 activate_service_led           
+c   8000 _const_mask                    #   E801 _larva_flag                    
+c   8001 _sysimgext_phase               #   E80C _xcvr_mode                     
+c   8001 _sysimgext_nv_length_override  #   E83C msg_tag_index                  
+#   8001 _stretched_triac_supported     #   E83C nv_in_index                    
+c   8001 _sysimgext_proxy               #   E84D ramQElemSizeIn                 
+#   8001 _alternate_clocking            #   E84E ramQElemSizeOut                
+#   8001 _system_image_extensions       #   E856 qfree_out                      
+c   8001 _size_proxy_route_index_entry  #   E85E qincoming                      
+c   8001 _set_nv_length_valid           #   E862 qresponse                      
+c   8001 _sci_spi_supported             #   E878 _larva_L4                      
+c   8001 _ram_test_power_up_only        #   E8C5 _mip_IF0                       
+c   8001 _ee_reserved_offset            #   E8C7 io_pin_event_data              
+#   8001 _oma                           #   E8CE _dbg_input_value               
+c   8001 _memory_forwarding             #   E8CE input_value                    
+c   8001 _field_debug                   #   E8D0 nv_array_index                 
+#   E8D0 _nv_array_index                .   F00D PROGID                         
+#   E8D1 io_pdata_imgs                  #   F00D eeIDString                     
+#   E8D5 _io_gen_img                    .   F015 MODETABLE                      
+#   E939 _sys_flags                     #   F015 eeModeFlags                    
+#   E948 _cpu_sync                      .   F01A BUFCOUNTS                      
+#   E94C nv_in_addr                     .   F01D EENEARBYTES                    
+#   E954 _sys_stat                      .   F023 TX_CTRL                        
+#   E96C ee_lock                        #   F024 eeCustomMac                    
+#   E96D nsa_relative                   #   F024 read_only_data_2               
+#   E96D nsa_features                   #   F029 read_only_data_3               
+#   E97A %fl_error                      #   F029 eeNVCount                      
+#   E97B %s32_temp1                     #   F02B eeSNVT2Ptr                     
+#   E97B %fl_temp1                      #   F02E config_data                    
+#   E97F %s32_temp2                     #   F036 eeClock                        
+#   E97F %fl_temp2                      #   F036 eeCommStart                    
+#   E983 %s32_temp3                     #   F037 eeAltClock                     
+#   E983 %fl_intl_temp                  .   F047 DOMAIN                         
+#   E99B _last_retry_extra_time         #   F047 eeDomain                       
+#   E9AF _sys_callback_address          #   F050 eeDomain0Key                   
+#   E9B1 BASEPG3                        #   F05F eeDomain1Key                   
+#   E9B1 _larva_L5                      .   F7E9 SCI_input_pad1                 
+#   E9BC _dbg_input_is_new              .   F7F1 SCI_input_pad2                 
+#   E9BC input_is_new                   .   F7F1 SCI_output_pad1                
+#   F000 read_only_data                 .   F7F9 shortstack_version             
+#   F000 eeNeuronID                     .   F7FA sp_notify_interval             
+#   F008 eeNVFixedPtr                   .   F7FB APP_signature                  
+.   F008 DIRECTORY                      .   F7FD SISD_valid                     
+.   F00A PROTECTBIT                     .   F7FE post_reset_pause               
+#   F00B eeSNVTPtr                      #   F7FF eeErrorLog                     
+                            SYMBOLS BY NAME
+
+#   4004 %appVersion                    #   0019 _alloc                         
+#   3B8F %fl_add                        #   1BF0 _alter_icntrl_g                
+#   3E7C %fl_adjust_exp                 #   8001 _alternate_clocking            
+#   3E5C %fl_arg2_zero                  #   0B49 _and16                         
+#   3E5E %fl_arg3_zero                  #   0378 _app_watchdog                  
+#   3B37 %fl_cmp                        #   00BE _arb_presf                     
+#   3E6F %fl_compare_exp                c   80BE _arbitrary_preempt_safe        
+#   3E49 %fl_copy                       #   1A3B _bit_input                     
+#   3E4B %fl_copy1                      #   1A9B _bit_output_ext                
+#   3D47 %fl_div                        #   1A9B _bit_output_ext2               
+#   3B69 %fl_eq                         #   1A9F _bit_output_hi                 
+#   E97A %fl_error                      #   1AA3 _bit_output_lo1                
+#   3EFC %fl_finish                     #   1AA1 _bit_output_lo2                
+#   3B75 %fl_ge                         #   19FA _bitshift_input                
+#   3B6B %fl_gt                         #   34C2 _bitshift_output               
+#   E983 %fl_intl_temp                  #   34FB _bitshift_setup                
+#   3B78 %fl_le                         #   0CA0 _bound_mt                      
+#   3B6D %fl_lt                         #   1012 _bound_nv                      
+#   3CD8 %fl_mul                        #   1012 _bound_nv1                     
+#   3B73 %fl_ne                         #   8008 _build_number                  
+#   3E39 %fl_neg                        #   2BA6 _build_status                  
+#   3E94 %fl_setup                      #   0046 _bump_ptr                      
+#   3B84 %fl_sub                        #   1A51 _byte_input                    
+#   E97B %fl_temp1                      #   1AB3 _byte_output                   
+#   E97F %fl_temp2                      #   27A2 _calculate_cnfg_checksum       
+#   3B80 %fl_zero                       #   071E _change_state                  
+#   4002 %key                           #   075E _check_configured              
+#   4193 %MicroServer                   #   305E _checksum_generate             
+#   4193 %mip_s23_interface             #   0C0B _clear_apps_flags              
+#   E97B %s32_temp1                     c   8000 _const_mask                    
+#   E97F %s32_temp2                     #   0081 _cpu_halt_check                
+#   E983 %s32_temp3                     #   E948 _cpu_sync                      
+#   3E21 %ump_cmp                       #   E9BC _dbg_input_is_new              
+#   494C %usVersion                     #   E8CE _dbg_input_value               
+.   401A _%_MICROSERVER%INIT            #   001E _dealloc                       
+.   401F _%_MICROSERVER%INITV           #   0054 _dec16                         
+#   8000 __max_transient_app            #   074F _disable_callbacks             
+#   8000 __num_transient_app            c   8000 _disable_dynamic_xcvr_config   
+#   1A21 _A_delay                       #   0AA5 _div16                         
+#   1A22 _A_delay_b                     #   0AD7 _div16s                        
+#   1A1F _A_delay_pd                    #   0A98 _div32_16                      
+#   0B3A _abs16                         #   0A62 _div32_16_core                 
+#   0AC9 _abs8                          #   0A9D _div8                          
+#   497E _access_check                  #   0AB7 _div8s                         
+#   0A3A _add16                         #   0020 _drop_n                        
+#   0465 _add_8_16                      #   0026 _drop_n_preserve_1             
+#   0046 _add_8_16f                     #   002C _drop_n_preserve_2             
+#   0A38 _adds_8_16                     #   0024 _drop_n_return_1               
+#   07CF _adjust_checksum1              #   002A _drop_n_return_2               
+#   1649 _alias_count                   #   3AB8 _dualslope_input               
+#   3AD9 _dualslope_start               #   1B13 _frequency_output              
+#   3AE5 _edgelog_input                 #   0B73 _gequ16                        
+#   06AC _ee_memcpy                     #   0B5E _gequ16s                       
+#   06A8 _ee_memcpy_uncond              #   0B77 _gequ8                         
+c   8001 _ee_reserved_offset            #   0B58 _gequ8s                        
+#   0695 _ee_write_int                  #   05D5 _get_address                   
+#   069A _ee_write_long                 #   07EA _get_appsum_location           
+#   34B3 _eefar_init                    #   1830 _get_auth_std                  
+#   0695 _eeprom_far_write              #   05F4 _get_domain                    
+#   069A _eeprom_far_write_long         #   06AF _get_error_log                 
+#   0693 _eeprom_write                  #   2D15 _get_prit_p                    
+#   0698 _eeprom_write_long             #   2D24 _get_prt_p                     
+c   8001 _eevar_offset                  #   1875 _get_rcvtx_p                   
+#   0752 _enable_callbacks              #   0386 _get_sem2                      
+#   0B84 _equal16                       #   352A _get_si_data_ptr               
+#   0B82 _equal8                        #   003E _get_sp                        
+c   8000 _evn_byte_1                    #   0001 _idem_dup                      
+c   8000 _evn_byte_2                    #   3FFF _image_end                     
+c   8010 _evn_byte_3                    #   0048 _inc16                         
+c   8013 _evn_byte_4                    #   068B _index_to_addr                 
+c   8001 _extended_io_count             #   1A1B _init_baud                     
+c   8003 _extended_onchip_eedata        #   1A6B _init_io_pins                  
+c   8000 _extended_onchip_eeprom        #   1C29 _init_timer_counter1           
+#   4000 _extended_start                #   1C2B _init_timer_counter2           
+#   34BC _extended_version_number       #   811F _interrupt_capability          
+.   402A _fast_serial_input             #   102B _io_change_init                
+.   402B _fast_serial_input2            #   106A _io_changes                    
+#   46E4 _fast_serial_input2_SCI        #   1056 _io_changes_by                 
+#   4739 _fast_serial_input2_SCI_pad    #   104B _io_changes_to                 
+#   47C6 _fast_serial_input2_SPI        #   1A97 _io_direction_hi               
+#   4834 _fast_serial_input2_SPI_pad    #   1A97 _io_direction_hi2              
+#   46E3 _fast_serial_input_SCI         #   1A99 _io_direction_lo               
+#   4738 _fast_serial_input_SCI_pad     #   E8D5 _io_gen_img                    
+#   47C5 _fast_serial_input_SPI         #   1085 _io_input_value                
+#   4833 _fast_serial_input_SPI_pad     #   33E9 _io_sci_baud                   
+.   4048 _fast_serial_output            #   3384 _io_sci_get_error              
+.   4049 _fast_serial_output2           #   33D7 _io_sci_init                   
+#   4717 _fast_serial_output2_SCI       #   336D _io_sci_parity                 
+#   4795 _fast_serial_output2_SCI_pad   #   3404 _io_sci_set_buffer_in          
+#   4802 _fast_serial_output2_SPI       #   3408 _io_sci_set_buffer_out         
+#   48A6 _fast_serial_output2_SPI_pad   #   33C9 _io_scispi_abort               
+.   4041 _fast_serial_output2_wait      #   3380 _io_scispi_input_ready         
+#   4716 _fast_serial_output_SCI        #   3377 _io_scispi_output_ready        
+#   4794 _fast_serial_output_SCI_pad    #   1C17 _io_set_clock                  
+#   4801 _fast_serial_output_SPI        #   3B20 _io_set_clock_x2               
+#   48A5 _fast_serial_output_SPI_pad    #   33AA _io_spi_clock                  
+.   4042 _fast_serial_output_wait       #   3387 _io_spi_get_error              
+c   8001 _feature_set_1                 #   3392 _io_spi_init                   
+c   8000 _feature_set_2                 #   343A _io_spi_set_buffer             
+c   8001 _field_debug                   #   106F _io_update_occurs              
+#   1151 _flush_completes               #   04C4 _iteration16                   
+#   04F7 _free_rcvtx_by_domain          #   0BBB _l_shift16                     
+#   0BBB _l_shift16s                    #   8002 _min_context4_multiplier       
+#   0BA0 _l_shift8                      #   0B3E _minus16s                      
+#   0BE9 _l_shift8_3                    .   491A _mip_alloc                     
+#   0BE8 _l_shift8_4                    .   491A _mip_alloc_l5                  
+#   0BE7 _l_shift8_5                    .   492B _mip_cancel                    
+#   0BE6 _l_shift8_6                    .   492A _mip_free                      
+#   0BE5 _l_shift8_7                    #   E8C5 _mip_IF0                       
+#   0BA0 _l_shift8s                     #   48FE _mip_IF1                       
+#   0005 _larva_break                   #   48F7 _mip_IF2                       
+c   8000 _larva_clear_off               #   491A _mip_IF3                       
+#   E801 _larva_flag                    #   492A _mip_IF4                       
+#   0086 _larva_L1                      #   492B _mip_IF5                       
+#   0093 _larva_L2                      #   492E _mip_IF7                       
+#   235C _larva_L3                      .   48FE _mip_incoming                  
+#   E878 _larva_L4                      .   48FE _mip_incoming_l5               
+#   E9B1 _larva_L5                      #   0546 _mip_L1                        
+#   0009 _larva_suspend                 #   0567 _mip_L2                        
+#   E99B _last_retry_extra_time         #   0521 _mip_L4                        
+#   005B _ldP0_fetchl                   #   0522 _mip_L5                        
+#   27AA _leave_indexed_domain          #   0191 _mip_L6                        
+#   0B65 _less16                        .   48F7 _mip_outgoing                  
+#   0B7F _less16s                       .   48F7 _mip_outgoing_l5               
+#   0B69 _less8                         .   492E _mip_set_mode                  
+#   0B7C _less8s                        #   059F _mip_T1                        
+#   1A55 _leveldetect_input             #   0AD0 _mod16                         
+#   1B3A _loader_go                     #   0AE2 _mod16s                        
+#   1ADA _loader_prep                   #   0B05 _mod8                          
+#   0B89 _log16                         #   0ABF _mod8s                         
+#   0B8A _log8                          #   0DD9 _msg_addr_get                  
+#   0B86 _lognot16                      #   0D98 _msg_addr_set                  
+#   0B87 _lognot8                       #   0C11 _msg_alloc                     
+#   0A35 _lshift16_add16                #   0C0F _msg_alloc_priority            
+#   0A33 _lshift8_add16                 #   0C71 _msg_alloc_wait                
+#   0A31 _lshift8by1_add16              #   0CCA _msg_arrives                   
+#   0A2F _lshift8by2_add16              #   0DD0 _msg_auth_get                  
+#   1E2B _mac_L1                        #   0D8B _msg_auth_set                  
+#   0B0E _max16                         #   0DD9 _msg_byte_get                  
+#   0B18 _max16s                        #   0D98 _msg_byte_set                  
+#   0AF0 _max8                          #   0C7E _msg_cancel                    
+#   0AFA _max8s                         #   0CCC _msg_code_arrives              
+#   0674 _memcmp1                       #   0DCA _msg_code_get                  
+#   0432 _memcpy                        #   0DCA _msg_code_get_ex               
+#   0435 _memcpy1                       #   0D78 _msg_code_set                  
+#   06AC _memcpy8                       #   0CE2 _msg_completes                 
+c   8001 _memory_forwarding             #   0E12 _msg_data_blockget             
+#   0444 _memset                        #   0D26 _msg_data_blockset             
+#   0445 _memset1                       #   0DCC _msg_data_get                  
+#   043D _memset8                       #   0D7A _msg_data_set                  
+#   0B13 _min16                         #   0CDF _msg_fails                     
+#   0B1D _min16s                        #   0BF1 _msg_free                      
+#   0AF5 _min8                          #   0DDE _msg_in_get                    
+#   0AFF _min8s                         #   0E0D _msg_len_get                   
+#   0E0D _msg_len_get_ex                #   0F4B _nv_update_int                 
+#   0D9C _msg_out_set                   #   0F4C _nv_update_int_offset          
+#   0D63 _msg_priority_set              #   0F51 _nv_update_long                
+#   0CC8 _msg_receive                   #   0F52 _nv_update_long_offset         
+#   0C40 _msg_send                      #   0FAC _nv_update_occurs              
+#   0DD4 _msg_service_get               #   0F5C _nv_update_request             
+#   0D8F _msg_service_set               #   0F5C _nv_update_request1            
+#   0CE5 _msg_succeeds                  #   3999 _nv_update_request_all         
+#   0D93 _msg_tag_set                   #   0FFD _nv_update_succeeds            
+#   0D93 _msg_tag_set1                  #   10F1 _offline                       
+#   0A48 _mul16                         #   8001 _oma                           
+#   0A48 _mul16s                        #   1B2B _oneshot_output                
+#   0A59 _mul8                          #   10FF _online                        
+#   0A41 _mul8l                         #   1B93 _ontime_input                  
+#   0B31 _mul8ls                        #   0B4E _or16                          
+#   0A46 _mul_8_16                      #   1CB9 _parallel_input                
+#   0A43 _muls_8_16                     #   1C7F _parallel_input_ready          
+#   3A81 _muxbus_read                   #   1CCC _parallel_output               
+#   3A93 _muxbus_reread                 #   1CAB _parallel_output_ready         
+#   3AAD _muxbus_rewrite                #   1C78 _parallel_output_request       
+#   3A9E _muxbus_write                  #   1B93 _period_input                  
+#   26B0 _net_mgmt_processing           #   0015 _pop                           
+#   3A46 _neurowire_inv_master          #   0013 _pop1                          
+#   0080 _new_binding_constraints       #   398B _popd                          
+#   1A3D _nibble_input                  #   3989 _popd1                         
+#   1AAB _nibble_output                 #   10AE _preempt                       
+#   8031 _nm_capabilities               #   8000 _programmable_driver_strength  
+#   19F3 _nm_service_send               c   8000 _programmable_lvi              
+#   1904 _nm_set_nk                     #   1B93 _pulsecount_input              
+#   8002 _nm_version                    #   1B45 _pulsecount_output             
+#   00AF _node_reset                    #   1B07 _pulsewidth_output             
+#   0B44 _not16                         #   000F _push                          
+#   80FF _nv_all                        #   000D _push1                         
+#   E8D0 _nv_array_index                #   3983 _pushd                         
+#   0F72 _nv_array_poll                 #   3981 _pushd1                        
+#   1002 _nv_array_update_completes     #   1BC1 _quadrature_input              
+#   0FF8 _nv_array_update_fails         #   0040 _query_stats                   
+#   0FAD _nv_array_update_occurs        #   0BC7 _r_shift16                     
+#   399F _nv_array_update_request       #   0BD6 _r_shift16s                    
+#   0FFE _nv_array_update_succeeds      #   0B8F _r_shift8                      
+#   164D _nv_count                      #   00C3 _r_shift8_3                    
+#   80FF _nv_count_mask                 #   00C2 _r_shift8_4                    
+#   1672 _nv_get_alias_p                #   00C1 _r_shift8_5                    
+#   165E _nv_get_cnfg_p                 #   00C0 _r_shift8_6                    
+#   166A _nv_get_cnfg_p1                #   00BF _r_shift8_7                    
+#   1651 _nv_get_cnfg_p_pri             #   0B97 _r_shift8s                     
+#   1688 _nv_get_fixed_p                c   8001 _ram_test_power_up_only        
+#   0F5C _nv_poll                       #   06D0 _raw_error_log                 
+#   0F6C _nv_poll_all                   c   8002 _read_only_data_struct_version 
+#   0F57 _nv_update                     #   045F _register_call                 
+#   1001 _nv_update_completes           #   0381 _rel_sem2                      
+#   0FF7 _nv_update_fails               #   0C21 _resp_alloc                    
+#   0CEC _resp_arrives                  c   8001 _sysimgext_nv_length_override  
+#   0C7E _resp_cancel                   c   8001 _sysimgext_phase               
+#   0D6E _resp_code_set                 c   8001 _sysimgext_proxy               
+#   0D70 _resp_data_set                 c   82BD _sysram_base_usage             
+#   0BFE _resp_free                     #   8001 _system_image_extensions       
+#   0CE8 _resp_receive                  c   8013 _system_version                
+#   0C40 _resp_send                     #   8000 _system_version_minor          
+#   0457 _restore_ptrs                  #   03C4 _timer_events                  
+#   044E _save_ptrs                     #   03E4 _timer_expires                 
+#   2104 _scheduler_loop                #   03F1 _timer_expires_any             
+#   8003 _sci_spi_features              #   0418 _timer_get                     
+c   8001 _sci_spi_supported             #   03F8 _timer_mset                    
+#   1BF8 _select_input_fn               #   03FA _timer_mset_repeat             
+#   1BEC _select_mux                    #   03F4 _timer_off                     
+#   27A0 _self_installation             #   03FF _timer_sset                    
+#   19F2 _service_pin_send              #   0403 _timer_sset_repeat             
+#   0CDB _set_apps_flags                #   0348 _timer_update                  
+c   8001 _set_nv_length_valid           #   1B87 _totalize_input                
+#   3008 _set_ram_ptrs                  #   1B38 _triac_level_output            
+#   1AC7 _set_tco_p                     #   1B38 _triac_output                  
+#   057A _set_typeout                   #   1B30 _triac_pulse_output            
+c   8000 _sidata_last_eecode            #   1B13 _triggered_count_output        
+#   004E _sign_extend16                 #   0002 _tx_by_addr                    
+#   0B6D _signs_differ16                #   0429 _unpack_nibs                   
+#   1A28 _sio_load_delay                #   2740 _update_address                
+c   8000 _sio_near                      #   4968 _update_record                 
+c   8005 _size_addr_tbl_entry           #   0CC5 _wink                          
+#   8100 _size_app_basepg               #   004B _xch_inc_xch                   
+c   800F _size_domain_entry             #   E80C _xcvr_mode                     
+c   8004 _size_evn                      #   0B53 _xor16                         
+c   8003 _size_io_change_event          #   0A28 abs8_twice                     
+c   8004 _size_nv_alias                 #   4958 access_alias                   
+c   8003 _size_nv_cnfg                  #   497A access_domain                  
+c   8003 _size_nv_fix                   #   E800 activate_service_led           
+c   800C _size_proxy_route_entry        .   4007 APINIT                         
+c   8001 _size_proxy_route_index_entry  .   F7FB APP_signature                  
+c   800D _size_rcv_tx                   .   43D8 application_change             
+c   8000 _size_sys_eevars               #   108C application_restart            
+c   8000 _size_sys_ramvars              #   E9B1 BASEPG3                        
+c   8004 _size_timer                    .   F01A BUFCOUNTS                      
+c   801C _size_tx_ctl_blk               .   4487 check_appinit_done             
+#   1183 _sleep                         .   42F8 check_for_nv                   
+.   48F7 _smip_system_image             .   405F check_host_busy                
+#   8001 _stretched_triac_supported     .   405F check_host_ready               
+#   0B25 _sub16                         .   42D8 check_incoming_queues          
+#   8001 _supports_explicit_addressing  .   435A check_isi_downlink             
+#   E9AF _sys_callback_address          .   42B7 check_local_done               
+#   06BC _sys_error_log                 .   456D check_nv_init                  
+#   04F4 _sys_flag_clear                .   433A check_offline                  
+#   0502 _sys_flag_set                  .   4327 check_reset                    
+#   E939 _sys_flags                     .   4487 check_usop                     
+#   E954 _sys_stat                      .   42D0 check_wdt                      
+#   282D chksum_recalc_mode             #   333A io_iperiod                     
+#   1C7A clear_pio_request              #   3335 io_irelease                    
+#   2C21 clear_status                   #   331F io_itc_clear                   
+#   F02E config_data                    #   331A io_itc_cond                    
+.   4136 convert_incoming_to_response   #   3307 io_mask_isr                    
+#   3A13 crc16                          #   E8D1 io_pdata_imgs                  
+#   36DF crc16_ccitt                    #   E8C7 io_pin_event_data              
+#   3A32 crc8                           #   32DF io_set_isr                     
+#   04B9 delay                          .   406F is_eat_supported               
+#   478E delay_11n_cycles               .   4371 isi_dealloc_buffer             
+#   04B0 delay_1msec                    .   4360 isi_rpc_call                   
+#   4785 delay_22n_cycles               .   E7FE loc_hi                         
+.   F008 DIRECTORY                      .   E7FF loc_lo                         
+.   42E9 do_command_in_processing       .   41DF main_loop                      
+.   434F do_flush_cancel                #   19D8 make_apdu_p                    
+.   F047 DOMAIN                         .   41E4 microServerAllocLocals2        
+#   E96C ee_lock                        .   41F5 microServerCore                
+#   F037 eeAltClock                     .   F015 MODETABLE                      
+#   F036 eeClock                        #   04B6 msec_delay                     
+#   F036 eeCommStart                    #   E83C msg_tag_index                  
+#   F024 eeCustomMac                    #   39C4 muldiv24                       
+#   F047 eeDomain                       #   39FD muldiv24s                      
+#   F050 eeDomain0Key                   .   E7FA neuron_c_env                   
+#   F05F eeDomain1Key                   #   00AF node_reset                     
+#   F7FF eeErrorLog                     #   E96D nsa_features                   
+#   F00D eeIDString                     #   E96D nsa_relative                   
+#   F015 eeModeFlags                    #   E8D0 nv_array_index                 
+.   F01D EENEARBYTES                    #   E94C nv_in_addr                     
+#   F000 eeNeuronID                     #   E83C nv_in_index                    
+#   F029 eeNVCount                      .   4699 nvinit_cleanup                 
+#   F008 eeNVFixedPtr                   .   467B nvinit_done_this               
+#   F02B eeSNVT2Ptr                     .   463F nvinit_this_nv                 
+#   F00B eeSNVTPtr                      #   10E3 offline_confirm                
+.   4168 enter_flush_state              #   1104 online_confirm                 
+#   06BF error_log                      #   08FA post_events                    
+#   1146 flush                          .   F7FE post_reset_pause               
+#   04F2 flush_cancel                   #   3991 preemption_mode                
+.   411B free_incoming_app_buf          .   4483 process_appinit_done           
+.   4075 get_address_count              .   43DE process_appinit_misc           
+.   4020 get_bitrate_id                 .   45DE process_nv_init                
+#   493A go_configured                  .   45A0 process_packet                 
+#   1141 go_offline                     .   40FF process_ul_msg_done            
+#   493E go_unconfigured                .   4101 process_ul_nv                  
+.   416D handle_error                   .   F00D PROGID                         
+.   4083 handle_incoming_message        .   F00A PROTECTBIT                     
+.   4121 handle_incoming_response       #   E856 qfree_out                      
+#   E9BC input_is_new                   #   E85E qincoming                      
+#   E8CE input_value                    #   E862 qresponse                      
+#   3B28 io_edgelog_preload             #   E84D ramQElemSizeIn                 
+#   3324 io_iaccess                     #   E84E ramQElemSizeOut                
+#   32FE io_idis                        #   0BED random                         
+#   3300 io_iena                        #   F000 read_only_data                 
+#   F024 read_only_data_2               #   3675 siuspi_idlewait                
+#   F029 read_only_data_3               #   362C siuspi_init                    
+.   4424 recalc_nv_fixed                #   3686 siuspi_initw3                  
+.   46B1 reinit_alias_table             #   3692 siuspi_initw4                  
+.   400A RESET                          #   369A siuspi_inst1                   
+.   4155 restore_neuron_c_env           #   36C7 siuspi_rdsr                    
+#   492F retrieve_status                #   364F siuspi_read_a3                 
+#   1198 retrieve_xcvr_status           #   3651 siuspi_read_a3nc               
+.   4147 save_neuron_c_env              #   3699 siuspi_wren                    
+#   04BB scaled_delay                   #   3688 siuspi_write3                  
+.   F7E9 SCI_input_pad1                 #   3694 siuspi_write4                  
+.   F7F1 SCI_input_pad2                 .   F7FA sp_notify_interval             
+.   F7F1 SCI_output_pad1                .   E7F8 sp_state                       
+.   4573 send_explicit_message          .   4012 TEVT                           
+.   4118 send_sicb_ul                   #   041F timers_off                     
+.   E7F9 serial_interface_type          .   F023 TX_CTRL                        
+#   39B0 service_pin_msg_send           #   4950 update_alias                   
+#   39BB service_pin_state              .   46A7 update_checksum                
+#   1A31 set_base2p                     #   4961 update_config_data             
+#   1A36 set_base_p                     .   469D update_ram_pointers            
+#   0919 set_eeprom_lock                .   423C uplink_reset                   
+#   3259 set_irq_debugging              .   456D usop_done                      
+.   4183 set_sisd_invalid               #   007B watchdog_update                
+.   418C set_sisd_valid                 #   007D watchdog_update_old            
+.   F7F9 shortstack_version             .   4474 write_app_signature            
+.   F7FD SISD_valid                     .   4451 write_comm_para                
+#   363D siu_writeloop                  .   43FA write_nv_count                 
+#   364D siuspi_cmp_a3                  .   4464 write_program_id               
+#   3680 siuspi_idledecs                .   4419 write_rods1_nv_count           
+ 
