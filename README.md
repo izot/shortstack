@@ -90,10 +90,4 @@ Use of this code is subject to your compliance with the terms of the
 Echelon IzoT(tm) Software Developer's Kit License Agreement which is
 available in the **LICENSE.md** file in your **shortstack** directory.
 
-Copyright © 2002-2015 Echelon Corporation. The Echelon logo, Echelon, 
-LON, LONWORKS, Digital Home, i.LON, LNS, LONMARK, LonMaker, LonPoint, 
-LonTalk, Neuron, NodeBuilder, Pyxos, and ShortStack, are trademarks 
-of Echelon Corporation registered in the United States and other 
-countries. A full list of Echelon trademarks is available at 
-<http://www.echelon.com>. All other trademarks are owned by their 
-respective owners. All rights reserved.
+Copyright © 2002-2015 Echelon Corporation. Echelon, LON, the Echelon logo, LonWorks, NodeBuilder, LonTalk, LonPoint, Neuron, 3120, 3150, LNS, i.LON, ShortStack, Pyxos, LonMaker, IzoT, LonLink, LonResponse, LonSupport, OpenLDV, LonScanner, and LonBridge are trademarks of Echelon Corporation that may be registered in the United States and other countries. For a complete list of registered trademarks see the Echelon Web site at www.echelon.com. All rights reserved.
