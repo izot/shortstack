@@ -1,5 +1,5 @@
 Neuron Linker Version 5.40.02 Copyright (c) Echelon Corporation 1992-2014
-Linked at Mon Feb 09 07:36:20 2015
+Linked at Thu Feb 19 09:21:38 2015
 C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.nxr
 
                        LIST OF MEMORY AREAS
@@ -81,7 +81,7 @@ Successfully linked for PL 3150 2K.
                 firmware version, and the number of receive
                 transaction control blocks.
         Flash support requires an additional 128 bytes of RAM.
-        FLASH Signature  = AF:B19D @ 4700 .. 4702
+        FLASH Signature  = 46:7936 @ 4700 .. 4702
 
 Buffer Configuration Summary:
 
@@ -233,7 +233,7 @@ C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIFULL.LIB(RUNNING):
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIFULL.LIB(APPCHG):
   Rel %IsiSetBootLevel        --   --   --      --   --   --     5C07 5C0B 0005
 
-C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430ISI.LIB(V4_30_0):
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430ISI.LIB(V4_30_04):
   Rel %usVersion              --   --   --      --   --   --     5C0C 5C0F 0004
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIFULL.LIB(CONNECT):

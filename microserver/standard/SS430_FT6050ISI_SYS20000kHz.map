@@ -1,5 +1,5 @@
 Neuron Linker Version 5.40.02 Copyright (c) Echelon Corporation 1992-2014
-Linked at Mon Feb 09 07:36:14 2015
+Linked at Thu Feb 19 09:21:32 2015
 C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.nxr
 
                        LIST OF MEMORY AREAS
@@ -238,7 +238,7 @@ C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\VER21\GEN.LIB(L_DIAG):
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISI6000.LIB(APPCHG):
   Rel %IsiSetBootLevel        --   --   --      --   --   --     7058 705C 0005
 
-C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430ISI.LIB(V4_30_0):
+C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430ISI.LIB(V4_30_04):
   Rel %usVersion              --   --   --      --   --   --     705D 7060 0004
 
 C:\PROGRAM FILES (X86)\LONWORKS\IMAGES\VER21\GEN.LIB(L_ACCES8):

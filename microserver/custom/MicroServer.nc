@@ -121,6 +121,15 @@
 // DO NOT CHANGE ANY ASPECT OF THE I/O DECLARATION - the ShortStack library
 // (e.g. ShortStack400.lib) relies on these declarations, and changing the
 // following declarations is likely to result in a defunct Micro Server.
+//
+// Note that the I/O 1 and I/O 10 signals change direction subject to the
+// chosen link layer mode, selected with the I/O 3 SPI/SCI~ signal. The
+// definitions below define both I/O 1 and I/O 10 as input so that the
+// Micro Server starts out with high impedance on these pins until, very
+// soon into the MicroServer() routine, the ShortStack Micro Server
+// samples the SPI/SCI~ signal and adjusts the direction of I/O 1 and 10
+// accordingly. Prior to ShortStack 4.30, the I/O 1 and I/O 10 pines were
+// declared outputs by default. [SS-55122, SS-59615]
 // ---------------------------------------------------------------------
 #ifndef SS_5000
 #ifndef SS_6050
@@ -129,7 +138,7 @@
 #endif  // SS_5000
 
 IO_0 output     bit CTS = 1;                    // _CTS (SCI); R/W_ (SPI)
-IO_1 output     bit SLCK = 1;                   // _HRDY (SCI); SCLK (SPI)
+IO_1 input      bit SLCK;                       // _HRDY (SCI); SCLK (SPI)
 #pragma ignore_notused CTS
 #pragma ignore_notused SLCK
 
@@ -155,9 +164,11 @@ IO_7 output     bit MOSI;                       // NC (SCI); MOSI (SPI)
 IO_8 input      serial fast_in;                 // RXD (SCI); MISO (SPI)
 IO_9 input      bit rsvd;                       // Reserved
 IO_10 output    serial fast_out;                // TXD (SCI); _HRDY (SPI)
+IO_10 input     bit default_direction_10;
 #pragma ignore_notused fast_in
 #pragma ignore_notused rsvd
 #pragma ignore_notused fast_out
+#pragma ignore_notused default_direction_10
 
 // ---------------------------------------------------------------------
 // The following section contains the executable portion of the Micro
