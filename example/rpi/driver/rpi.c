@@ -471,20 +471,32 @@ static int Openf(mode_t mode, const char* fmt, ...)
      */
     if (mode & O_WRONLY) {
         int timeout = 100;
-        int error = 0;
         struct stat status = {0};
 
         do {
 			/*
 			 * We always begin with a small delay. It seems this is almost
-			 * always required.
+			 * always required before we can even stat the file, because
+			 * execute permission to the directory is required to stat()
+			 * the file, and the file must exist.
 			 */
 			struct timespec wait = {0, 5000000};    // 5ms
 			nanosleep(&wait, NULL);
 			--timeout;
 
-            error = stat(filename, &status);
-        } while (timeout && !error && !(status.st_mode & S_IWGRP));
+			if (stat(filename, &status)) {
+				/* stat() failed. This implementation assumes that the
+				 * failure is transient, either because the GPIO sysfs
+				 * value or direction file does not yet exist, or
+				 * because the folder containing that file does not yet
+				 * exist or is not yet searchable (executable), which
+				 * is required by stat(). Therefore, this implementation
+				 * ignores the error and tries again, replying on eventual
+				 * success or failure by timeout.
+				 */
+				memset(&status, 0, sizeof(status));
+			}
+        } while (timeout && !(status.st_mode & S_IWGRP));
     }
 
     return open(filename, mode);
