@@ -29,7 +29,7 @@
  */
 #if defined(__GNUC__)
 #   pragma GCC diagnostic ignored "-Wswitch"
-#endif  // __GNUC__
+#endif  /* __GNUC__ */
 
 /*
  * Following are a few macros that are used internally to access
@@ -113,7 +113,7 @@ static LonApiError InitMicroServer(void)
 {
     LonSmipMsg* pSmipMsg = NULL;
 
-    LonByte nTotalNvCount = LonNvCount;
+    LonByte nTotalNvCount = LonGetNvCount();
     LonByte nTotalNvsSent = 0;
     /* The LonGetAppInitData function returns a structure containing the application
        initialization data followed by the network variable initialization data.
@@ -128,7 +128,7 @@ static LonApiError InitMicroServer(void)
         memcpy(pSmipMsg->Payload, pInitData, LON_APP_INIT_MSG_SIZE);
 
         if (LonCustomCommunicationParameters(pSmipMsg->Payload + LON_APPINIT_OFFSET_COMMPARAM)) {
-            // Activate these parameters:
+            /* Activate these parameters */
             pSmipMsg->Payload[LON_APPINIT_OFFSET_MISC] &= ~LON_USE_DEFAULT_COMMPARAMS;
         }
 
@@ -199,11 +199,17 @@ static LonApiError InitMicroServer(void)
  * Function: LonInit
  * Initializes the ShortStack LonTalk Compact API and Micro Server
  *
+ * Arguments:
+ * ctrl - <LdvCtrl> driver control data defined by your driver
+ *
  * Returns:
  * <LonApiError>.
  *
  * Remarks:
- * The function has no parameters.  It returns a <LonApiError> code to indicate
+ * The function takes a LdvCtrl parameter, which it passes through
+ * to your driver's LdvOpen() function.
+ *
+ * The function returns a <LonApiError> code to indicate
  * success or failure. The function must be called during application
  * initialization, and prior to invoking any other function of the ShortStack
  * LonTalk Compact API.
@@ -218,13 +224,31 @@ const LonApiError LonInit(LdvCtrl* ctrl)
     memset((void*) &lastResetNotification, 0, sizeof(LonResetNotification));
     CurrentNmNdStatus = NO_NM_ND_PENDING;
 
-#ifdef LON_FRAMEWORK_TYPE_III
-
     if (result == LonApiNoError) {
-        LonFrameworkInit();
+    	result = LonReinit();
     }
 
-#endif  //  LON_FRAMEWORK_TYPE_III
+    return result;
+}
+
+/*
+ * Function: LonReinit
+ *
+ * Returns:
+ * <LonApiError>
+ *
+ * The function takes no arguments. It is called from within <LonInit>, but
+ * can also be called later during the lifetime of the application in order
+ * to re-initialize the Micro Server and framework without having to restart
+ * the link layer driver.
+ * This is sometimes used by advanced applications which implement pseudo-
+ * dynamic interfaces.
+ */
+const LonApiError LonReinit(void)
+{
+	LonApiError result = LonApiNoError;
+
+	LonFrameworkInit();
 
     if (result == LonApiNoError) {
         /* Read the NV values (if any) from persistent storage  */

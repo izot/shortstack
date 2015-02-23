@@ -4,6 +4,29 @@
  * Description: This file contains callback handler functions that must be
  * implemented by the application.
  *
+ * The IzoT Interface Interpreter always generates callback functions for
+ * the most commonly used events. The IzoT Markup Language provides build-in
+ * support for those, and supports dispatching into user-defined event
+ * handlers. Those callback functions are excluded from this file using
+ * conditional compilation based upon the LON_FRAMEWORK_TYPE_III symbol.
+ *
+ * For all else, you must implement the required callback handler either
+ * in this file, or by defining a compatible handler elsewhere, and declaring
+ * a matching xxx_HANDLED symbol in your project.
+ *
+ * For example, you can implement the functionality of the LonMsgArrived
+ * callback function in this file (an empty body of this callback function
+ * is defined below). Alternatively, you can implement the LonMsgArrived
+ * callback, using the same name and the correct prototype, elsewhere in
+ * your code and declare this fact by defining the LONMSGARRIVED_HANDLED
+ * symbol in your project.
+ *
+ * This symbol must be defined at the time of compiling ShortStackHandlers.c
+ * The symbol does not require a value.
+ *
+ * Callbacks which are governed by the IzoT Interface Interpreter cannot
+ * be overridden in this manner.
+ *
  * Copyright (c) Echelon Corporation 2002-2015.  All rights reserved.
  *
  * License:
@@ -24,22 +47,30 @@
 #include <unistd.h>
 
 /*
+ * Framework functions
+ */
+extern void* LonGetNvTable();
+extern LonUbits32 LonGetSignature();
+extern unsigned LonGetNvCount();
+
+/*
  * This example implementation uses the standard open(), close(), read() and
  * write() API for simple file I/O to maintain values of persistent network
  * variables. This is implemented with the LonNvdDeserializeNvs() and
  * LonNvdSerializeNvs() API, defined below in this module.
  * This example implementation is configured with two preprocessor symbols.
  * The LON_NVD_FILEIO macro is either defined or undefined. When defined,
- * the example implementation of the file system based value storage is enabled.
+ * the example implementation of the file system based value storage is
+ * enabled.
  * The LON_NVD_FILEIO macro defines the name of the file to be used.
  *
  * The recommended Eclipse configuration defines the LON_NVD_FILEIO symbol
  * with the project settings, allowing the sharing of this source code
  * across several applications.
  */
-//#define LON_NVD_FILEIO "myApp.nvd"
+/* #define LON_NVD_FILEIO "myApp.nvd" */
 #if defined(LON_NVD_FILEIO)
-	// Add a stringification macro definition
+	/* Add a stringification macro definition */
 #	define STRINGIFY(name)	STRING(name)
 #	define STRING(name)		#name
 #	define LON_NVD_FILENAME	STRINGIFY(LON_NVD_FILEIO)
@@ -84,7 +115,7 @@ void LonResetOccurred(const LonResetNotification* const pResetNotification)
      * TO DO: implement application-specific reset processing.
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonWink
@@ -101,7 +132,7 @@ void LonWink(void)
      * TO DO
      */
 }
-#endif  //  LON_FRAMEWORK_TYPE_III
+#endif  /*  LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonOffline
@@ -124,7 +155,7 @@ void LonOffline(void)
      * TO DO
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonOnline
@@ -147,7 +178,7 @@ void LonOnline(void)
      * TO DO
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonServicePinPressed
@@ -164,7 +195,7 @@ void LonServicePinPressed(void)
      * TO DO
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonServicePinHeld
@@ -172,8 +203,9 @@ void LonServicePinPressed(void)
  * configurable time.
  *
  * Remarks:
- * Use the LonTalk Interface Developer to enable this feature and to specify the
- * duration for which the service pin must be activated to trigger this callback.
+ * Use the LonTalk Interface Developer to enable this feature and to specify
+ * the duration for which the service pin must be activated to trigger this
+ * callback.
  *
  * For applications based on the IzoT Interface Interpreter (III), this
  * callback is implemented in the III-generated ShortStackDev.c, from where
@@ -186,34 +218,28 @@ void LonServicePinHeld(void)
      * TO DO
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonNvUpdateOccurred
  * Occurs when new input network variable data has arrived.
  *
  * Parameters:
- * index - global index (local to the device) of the network variable in question
+ * index - global index (local to the device) of the network variable
  * pSourceaddress - pointer to source address description
  *
  * Remarks:
- * The network variable with local index given in this callback has been updated
- * with a new value. The new value is already stored in the network variable's
- * location; access the value through the global variable representing the
- * network variable, or obtain the pointer to the network variable's value from
- * the network variable table. The pSourceAddress pointer is only valid for the
- * duration of this callback.
+ * The network variable with local index given in this callback has been
+ * updated with a new value. The new value is already stored in the network
+ * variable's location; access the value through the global variable
+ * representing the network variable, or obtain the pointer to the network
+ * variable's value from the network variable table.
+ * The pSourceAddress pointer is only valid for the duration of this callback.
  *
  * For an element of a network variable array, the index is the global network
  * variable index plus the array-element index. For example, if nviVolt[0] has
  * global network variable index 4, then nviVolt[1] has global network variable
  * index 5.
- *
- * Also, if this is a non-volatile network variable, that is, it has the
- * LON_NVDESC_PERSISTENT_MASK attribute set, store its value in non-volatile
- * memory as implemented by your application. An network variable is a
- * non-volatile network variable if it is declared with an *eeprom* keyword in
- * the model file or if it is a configuration property network variable (CPNV).
  *
  * For applications based on the IzoT Interface Interpreter (III), this
  * callback is implemented in the III-generated ShortStackDev.c, from where
@@ -226,15 +252,14 @@ void LonNvUpdateOccurred(
 )
 {
 }
-#endif  //  LON_FRAMEWORK_TYPE_III
+#endif  /*  LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback:   LonNvUpdateCompleted
  * Signals completion of a network variable update
  *
  * Parameters:
- * index - global index (local to the device) of the network variable that was
- * processed
+ * index - global index (local to the device) of the network variable
  * success - indicates whether the update was successful or unsuccessful
  *
  * Remarks:
@@ -253,7 +278,7 @@ void LonNvUpdateCompleted(const unsigned index, const LonBool success)
      * TO DO
      */
 }
-#endif  // LON_FRAMEWORK_TYPE_III
+#endif  /* LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonGetCurrentNvSize
@@ -263,7 +288,7 @@ void LonNvUpdateCompleted(const unsigned index, const LonBool success)
  * index - the local index of the network variable
  *
  * Returns:    Current size of the network variable.
- *             Zero if the network variable corresponding to index doesn't exist.
+ *             Zero if the network variable index doesn't exist.
  *
  * Remarks:
  * If the network variable size is fixed, this function should return
@@ -287,7 +312,8 @@ void LonNvUpdateCompleted(const unsigned index, const LonBool success)
 const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
 {
     unsigned size = 0;
-    const LonNvDescription* const pNvTable = LonGetNvTable();
+    const LonNvDescription* const pNvTable =
+    		(const LonNvDescription* const )LonGetNvTable();
 
     if (LON_GET_ATTRIBUTE(pNvTable[nvIndex], LON_NVDESC_CHANGEABLE)) {
         /*
@@ -309,7 +335,7 @@ const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
 
     return size;
 }
-#endif  //  LON_FRAMEWORK_TYPE_III
+#endif  /*  LON_FRAMEWORK_TYPE_III */
 
 /*
  * Callback: LonNvdSerializeNvs
@@ -321,44 +347,47 @@ const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
  * when your application makes local assignments, such as assignments to
  * properties flagged with the device_specific and manufacture attributes.
  *
- * If the device contains any network variable that requires persistent storage,
- * such as an eeprom network variable or a configuration property network variable
- * (CPNV), the application should provide a mechanism to store and retrieve its
- * data from persistent memory.
- *
  * See <LonNvdDeserializeNvs> for the complimentary API.
+ *
+ * Declare LONNVDSERIALIZENVS_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONNVDSERIALIZENVS_HANDLED
 const LonApiError LonNvdSerializeNvs(void)
 {
 #if LON_PERSISTENT_NVS
 
 #ifdef LON_NVD_FILEIO
     LonApiError result = LonApiNoError;
-    int fd = open(LON_NVD_FILENAME, O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR);
+    int fd = open(
+				LON_NVD_FILENAME,
+				O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR
+			);
 
     if (fd == -1) {
         result = LonApiNvdFileError;
     } else {
         int index = 0;
-        const LonNvDescription* pNvDescription = LonGetNvTable();
+        const LonNvDescription* pNvDescription =
+        		(const LonNvDescription*)LonGetNvTable();
 
-        // Write the application signature first. This is read and validated
-        // by LonNvdDeserializeNvd to ensure that the data kept on file matches
-        // the exact set of this interface. The framework generator tools
-        // (LID, III) generate a 16-bit signature at this time. This code here
-        // is prepared for a possible future expansion to a 32-bit signature
-        // value.
-        uint32_t signature = LON_APP_SIGNATURE;
+        /*
+         * Write the application signature first. This is read and
+         * validated by LonNvdDeserializeNvd to ensure that the data
+         * kept on file matches the exact set of this interface.
+         */
+        const LonUbits32 signature = LonGetSignature();
+        const unsigned nvCount = LonGetNvCount();
 
         if (write(fd, &signature, sizeof(signature)) != sizeof(signature)) {
             result = LonApiNvdFailure;
         }
 
-        while (index < LON_NV_COUNT && result == LonApiNoError) {
+        while (index < nvCount && result == LonApiNoError) {
             unsigned length = LonGetCurrentNvSize(index);
 
             if (length && length != (unsigned) - 1) {
-                if (write(fd, pNvDescription->pData, length) != length) {
+                if (write(fd, (void*)pNvDescription->pData, length) != length) {
                     result = LonApiNvdFailure;
                 }
             } else {
@@ -393,6 +422,7 @@ const LonApiError LonNvdSerializeNvs(void)
     return LonApiNoError;
 #endif  /* LON_PERSISTENT_NVS */
 }
+#endif /* LONNVDSERIALIZENVS_HANDLED */
 
 /*
  * Callback: LonNvdDeserializeNvs
@@ -404,7 +434,11 @@ const LonApiError LonNvdSerializeNvs(void)
  * such as an eeprom network variable or a configuration property network variable
  * (CPNV), the application should provide a mechanism to store and retrieve its
  * data from persistent memory.
+ *
+ * Declare LONNVDDESERIALIZENVS_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONNVDDESERIALIZENVS_HANDLED
 const LonApiError LonNvdDeserializeNvs(void)
 {
 #if LON_PERSISTENT_NVS
@@ -423,29 +457,33 @@ const LonApiError LonNvdDeserializeNvs(void)
         }
     } else {
         int index = 0;
-        const LonNvDescription* pNvDescription = LonGetNvTable();
+        const LonNvDescription* pNvDescription =
+        		(const LonNvDescription*) LonGetNvTable();
 
-        // Write the application signature first. This is read and validated
-        // by LonNvdDeserializeNvd to ensure that the data kept on file matches
-        // the exact set of this interface. The framework generator tools
-        // (LID, III) generate a 16-bit signature at this time. This code here
-        // is prepared for a possible future expansion to a 32-bit signature
-        // value.
-        uint32_t signature = 0;
+        /*
+         * Write the application signature first. This is read and validated
+         * by LonNvdDeserializeNvd to ensure that the data kept on file matches
+         * the exact set of this interface. The framework generator tools
+         * (LID, III) generate a 16-bit signature at this time. This code here
+         * is prepared for a possible future expansion to a 32-bit signature
+         * value.
+         */
+        LonUbits32 signature = 0;
+        const unsigned nvCount = LonGetNvCount();
 
         if (read(fd, &signature, sizeof(signature)) != sizeof(signature)) {
             result = LonApiNvdFailure;
-        } else if (signature != (uint32_t)LON_APP_SIGNATURE) {
+        } else if (signature != LonGetSignature()) {
             /* The file applies to a different application. We accept this as
              * not an error (the application may have rightfully changed),
              * but we must ignore the file's content.
              */
             result = LonApiNoError;
-        } else while (index < LON_NV_COUNT && result == LonApiNoError) {
+        } else while (index < nvCount && result == LonApiNoError) {
                 unsigned length = LonGetCurrentNvSize(index);
 
                 if (length && length != (unsigned) - 1) {
-                    if (read(fd, pNvDescription->pData, length) != length) {
+                    if (read(fd, (void*)pNvDescription->pData, length) != length) {
                         result = LonApiNvdFailure;
                     }
                 } else {
@@ -480,6 +518,7 @@ const LonApiError LonNvdDeserializeNvs(void)
     return LonApiNoError;
 #endif  /* LON_PERSISTENT_NVS */
 }
+#endif	/*	LONNVDDESERIALIZENVS_HANDLED	*/
 
 #if LON_APPLICATION_MESSAGES
 
@@ -504,7 +543,11 @@ const LonApiError LonNvdDeserializeNvs(void)
  * application message codes in the value range indicated by the
  * <LonApplicationMessageCode> enumeration.
  * All pointers are only valid for the duration of this callback.
+ *
+ * Declare LONMSGARRIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONMSGARRIVED_HANDLED
 void LonMsgArrived(
     const LonReceiveAddress* const pAddress,
     const LonCorrelator correlator,
@@ -520,6 +563,7 @@ void LonMsgArrived(
      * TO DO
      */
 }
+#endif /* LONMSGARRIVED_HANDLED */
 
 /*
  * Callback: LonResponseArrived
@@ -535,7 +579,11 @@ void LonMsgArrived(
  * Remarks:
  * This callback occurs when a message arrives in response to an earlier request,
  * sent with the <LonSendMsg> API.
+ *
+ * Declare LONRESPONSEARRIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONRESPONSEARRIVED_HANDLED
 void LonResponseArrived(
     const LonResponseAddress* const pAddress,
     const unsigned tag,
@@ -548,6 +596,7 @@ void LonResponseArrived(
      * TO DO
      */
 }
+#endif	/* LONRESPONSEARRIVED_HANDLED	*/
 
 /*
  * Callback: LonMsgCompleted
@@ -560,21 +609,27 @@ void LonResponseArrived(
  * Remarks:
  * For unacknowledged or repeated messages, the transaction is complete when
  * the message has been sent with the configured number of retries. For
- * acknowledged messages, the Micro Server calls <LonMsgCompleted> with *success*
- * set to TRUE after receiving acknowledgments from all of the destination
- * devices, and calls <LonMsgCompleted> with *success* set to FALSE if
- * the transaction timeout period expires before receiving acknowledgements
- * from all destinations.  Likewise, for request messages, the transaction is
- * considered successful when the Micro Server receives a response from each of the
- * destination devices, and unsuccessful if the transaction timeout expires
- * before responses have been received from all destinations devices.
+ * acknowledged messages, the Micro Server calls <LonMsgCompleted> with
+ * *success* set to TRUE after receiving acknowledgments from all of the
+ * destination devices, and calls <LonMsgCompleted> with *success* set to
+ * FALSE if the transaction timeout period expires before receiving
+ * acknowledgements from all destinations.
+ * Likewise, for request messages, the transaction is considered successful
+ * when the Micro Server receives a response from each of the destination
+ * devices, and unsuccessful if the transaction timeout expires before
+ * responses have been received from all destinations devices.
+ *
+ * Declare LONMSGCOMPLETED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONMSGCOMPLETED_HANDLED
 void LonMsgCompleted(const unsigned tag, const LonBool success)
 {
     /*
      * TO DO
      */
 }
+#endif	/* LONMSGCOMPLETED_HANDLED */
 
 #endif    /* LON_APPLICATION_MESSAGES    */
 
@@ -595,7 +650,11 @@ void LonMsgCompleted(const unsigned tag, const LonBool success)
  * duration of this callback must make a copy of the <LonDomain> data.
  * This callback is part of the optional network management query API
  * (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONDOMAINCONFIGRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONDOMAINCONFIGRECEIVED_HANDLED
 void LonDomainConfigReceived(const LonDomain* const pDomain,
                              const LonBool success)
 {
@@ -603,6 +662,7 @@ void LonDomainConfigReceived(const LonDomain* const pDomain,
      * TO DO
      */
 }
+#endif	/* LONDOMAINCONFIGRECEVIED_HANDLED */
 
 /*
  * Callback: LonNvConfigReceived
@@ -618,7 +678,11 @@ void LonDomainConfigReceived(const LonDomain* const pDomain,
  * information beyond the duration of this callback must make a copy of the
  * <LonNvConfig> data. This callback is part of the optional
  * network management query API (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONNVCONFIGRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONNVCONFIGRECEIVED_HANDLED
 void LonNvConfigReceived(const LonNvConfig* const pNvConfig,
                          const LonBool success)
 {
@@ -626,6 +690,7 @@ void LonNvConfigReceived(const LonNvConfig* const pNvConfig,
      * TO DO
      */
 }
+#endif	/* LONNVCONFIGRECEIVED_HANDLED */
 
 /*
  * Callback: LonAliasConfigReceived
@@ -642,7 +707,11 @@ void LonNvConfigReceived(const LonNvConfig* const pNvConfig,
  * <LonAliasConfig> data.
  * This callback is part of the optional network management query API
  * (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONALIASCONFIGRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONALIASCONFIGRECEIVED_HANDLED
 void LonAliasConfigReceived(const LonAliasConfig* const pAliasConfig,
                             const LonBool success)
 {
@@ -650,6 +719,7 @@ void LonAliasConfigReceived(const LonAliasConfig* const pAliasConfig,
      * TO DO
      */
 }
+#endif	/* LONALIASCONFIGRECEIVED_HANDLED */
 
 /*
  * Callback:   LonAddressConfigReceived
@@ -665,7 +735,11 @@ void LonAliasConfigReceived(const LonAliasConfig* const pAliasConfig,
  * information beyond the duration of this callback must make a copy of the
  * <LonAddress> data. This callback is part of the optional network management
  * query API (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONADDRESSCONFIGRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONADDRESSCONFIGRECEIVED_HANDLED
 void LonAddressConfigReceived(const LonAddress* const pAddress,
                               const LonBool success)
 {
@@ -673,6 +747,7 @@ void LonAddressConfigReceived(const LonAddress* const pAddress,
      * TO DO
      */
 }
+#endif	/* LONADDRESSCONFIGRECEIVED_HANDLED */
 
 /*
  * Callback: LonConfigDataReceived
@@ -689,7 +764,11 @@ void LonAddressConfigReceived(const LonAddress* const pAddress,
  * the <LonConfigData> data.
  * This callback is part of the optional network management query API
  * (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONCONFIGDATARECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONCONFIGDATARECEIVED_HANDLED
 void LonConfigDataReceived(const LonConfigData* const pConfigData,
                            const LonBool success)
 {
@@ -697,6 +776,7 @@ void LonConfigDataReceived(const LonConfigData* const pConfigData,
      * TO DO
      */
 }
+#endif	/* LONCONFIGDATARECEIVED_HANDLED */
 
 /*
  * Callback: LonStatusReceived
@@ -712,13 +792,18 @@ void LonConfigDataReceived(const LonConfigData* const pConfigData,
  * information beyond the duration of this callback must make a copy of the
  * <LonStatus> data. This callback is part of the optional network management
  * query API (LON_NM_QUERY_FUNCTIONS).
+ *
+ * Declare LONSTATUSRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONSTATUSRECEIVED_HANDLED
 void LonStatusReceived(const LonStatus* const pStatus, const LonBool success)
 {
     /*
      * TO DO
      */
 }
+#endif	/* LONSTATUSRECEIVED_HANDLED */
 
 /*
  * Callback: LonTransceiverStatusReceived
@@ -739,7 +824,11 @@ void LonStatusReceived(const LonStatus* const pStatus, const LonBool success)
  * transceiver. If your application invokes that function for any other
  * transceiver type, this callback will declare a failure through the second
  * parameter.
+ *
+ * Declare LONTRANSCEIVERSTATUSRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONTRANSCEIVERSTATUSRECEIVED_HANDLED
 void LonTransceiverStatusReceived(const LonTransceiverParameters* const pStatus,
                                   const LonBool success)
 {
@@ -747,6 +836,7 @@ void LonTransceiverStatusReceived(const LonTransceiverParameters* const pStatus,
      * TO DO
      */
 }
+#endif	/* LONTRANSCEIVERSTATUSRECEIVED_HANDLED */
 
 #endif /* LON_NM_QUERY_FUNCTIONS */
 
@@ -768,8 +858,12 @@ void LonTransceiverStatusReceived(const LonTransceiverParameters* const pStatus,
  * specified virtual Smart Transceiver memory. This applies to template files,
  * configuration property value files, user-defined files, and possibly to other
  * data. The address space for this command is limited to the Smart
- * Transceiver�s 64 KB address space.
+ * Transceiver's 64 KB address space.
+ *
+ * Declare LONMEMORYREAD_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONMEMORYREAD_HANDLED
 const LonApiError LonMemoryRead(const unsigned address, const unsigned size, void* const pData)
 {
     char* pHostAddress = NULL;
@@ -793,6 +887,7 @@ const LonApiError LonMemoryRead(const unsigned address, const unsigned size, voi
 
     return result;
 }
+#endif /* LONMEMORYREAD_HANDLED */
 
 /*
  * Callback: LonMemoryWrite
@@ -809,8 +904,12 @@ const LonApiError LonMemoryRead(const unsigned address, const unsigned size, voi
  * access window. This callback function is used to write data at the specified
  * virtual Smart Transceiver memory.  This applies to configuration property
  * value files, user-defined files, and possibly to other data. The address space
- * for this command is limited to the Smart Transceiver�s 64 KB address space.
+ * for this command is limited to the Smart Transceiver's 64 KB address space.
+ *
+ * Declare LONMEMORYWRITE_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONMEMORYWRITE_HANDLED
 const LonApiError LonMemoryWrite(const unsigned address, const unsigned size, const void* const pData)
 {
     char* pHostAddress = NULL;
@@ -834,7 +933,7 @@ const LonApiError LonMemoryWrite(const unsigned address, const unsigned size, co
 
     return result;
 }
-
+#endif /* LONMEMORYWRITE_HANDLED */
 #endif  /* LON_DMF_ENABLED */
 
 #if LON_UTILITY_FUNCTIONS
@@ -847,13 +946,18 @@ const LonApiError LonMemoryWrite(const unsigned address, const unsigned size, co
  * a response to the ping command sent by the host application
  * to the Micro Server. This callback is part of the optional
  * utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONPINGRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONPINGRECEIVED_HANDLED
 void LonPingReceived(void)
 {
     /*
      * TO DO
      */
 }
+#endif /* LONPINGRECEIVED_HANDLED */
 
 /*
  * Callback: LonNvIsBoundReceived
@@ -868,13 +972,18 @@ void LonPingReceived(void)
  * variable *bound* tells whether the network variable identified by index
  * is bound. This callback is part of the optional
  * utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONNVISBOUNDRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONNVISBOUNDRECEIVED_HANDLED
 void LonNvIsBoundReceived(const unsigned index, const LonBool bound)
 {
     /*
      * TO DO
      */
 }
+#endif	/* LONNVISBOUNDRECEIVED_HANDLED */
 
 /*
  * Callback: LonMtIsBoundReceived
@@ -889,13 +998,18 @@ void LonNvIsBoundReceived(const unsigned index, const LonBool bound)
  * variable *bound* tells whether the message tag identified by index
  * is bound. This callback is part of the optional
  * utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONMTISBOUNDRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONMTISBOUNDRECEIVED_HANDLED
 void LonMtIsBoundReceived(const unsigned index, const LonBool bound)
 {
     /*
      * TO DO
      */
 }
+#endif /* LONMTISBOUNDRECEIVED_HANDLED */
 
 /*
  * Callback: LonGoUnconfiguredReceived
@@ -906,13 +1020,18 @@ void LonMtIsBoundReceived(const unsigned index, const LonBool bound)
  * If the Micro Server was in a configured state before the <LonGoUnconfigured>
  * request was sent, it will reset after going to the unconfigured state.
  * This callback is part of the optional utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONGOUNCONFIGUREDRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONGOUNCONFIGUREDRECEIVED_HANDLED
 void LonGoUnconfiguredReceived(void)
 {
     /*
      * TO DO
      */
 }
+#endif	/* LONGOUNCONFIGUREDRECEIVED_HANDLED */
 
 /*
  * Callback: LonGoConfiguredReceived
@@ -924,13 +1043,18 @@ void LonGoUnconfiguredReceived(void)
  * some serious error, such as an application checksum error, is detected in the
  * process.
  * This callback is part of the optional utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONGOCONFIGUREDRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONGOCONFIGUREDRECEIVED_HANDLED
 void LonGoConfiguredReceived(void)
 {
     /*
      * TO DO
      */
 }
+#endif /* LONGOCONFIGUREDRECEIVED_HANDLED */
 
 /*
  * Callback: LonAppSignatureReceived
@@ -945,13 +1069,18 @@ void LonGoConfiguredReceived(void)
  * request, the Micro Server has already invalidated the signature by the time
  * this callback is called.
  * This callback is part of the optional utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONAPPSIGNATURERECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONAPPSIGNATURERECEIVED_HANDLED
 void LonAppSignatureReceived(LonWord appSignature)
 {
     /*
      * TO DO
      */
 }
+#endif /* LONAPPSIGNATURERECEIVED_HANDLED */
 
 /*
  * Callback: LonVersionReceived
@@ -968,7 +1097,11 @@ void LonAppSignatureReceived(LonWord appSignature)
  * Remarks:
  * The Micro Server has responded to a <LonQueryVersion> request.
  * This callback is part of the optional utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONVERSIONRECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONVERSIONRECEIVED_HANDLED
 void LonVersionReceived(unsigned appMajor, unsigned appMinor, unsigned appBuild,
                         unsigned coreMajor, unsigned coreMinor, unsigned coreBuild)
 {
@@ -976,6 +1109,7 @@ void LonVersionReceived(unsigned appMajor, unsigned appMinor, unsigned appBuild,
      * TO DO
      */
 }
+#endif /* LONVERSIONRECEIVED_HANDLED */
 
 /*
  * Callback: LonEchoReceived
@@ -994,14 +1128,18 @@ void LonVersionReceived(unsigned appMajor, unsigned appMinor, unsigned appBuild,
  * introduced by incorrect line termination, excessive coupling or cross-talk, or by
  * excessive or out-of-sync link layer bit rates.
  * This callback is part of the optional utility API (LON_UTILITY_FUNCTIONS).
+ *
+ * Declare LONECHORECEIVED_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONECHORECEIVED_HANDLED
 void LonEchoReceived(const LonByte data[LON_ECHO_SIZE])
 {
     /*
      * TO DO
      */
 }
-
+#endif /* LONECHORECEIVED_HANDLED */
 #endif  /* LON_UTILITY_FUNCTIONS */
 
 #ifdef LON_NVDESC_ENCRYPT_MASK
@@ -1028,13 +1166,18 @@ void LonEchoReceived(const LonByte data[LON_ECHO_SIZE])
  *
  * Note that the provision of application-specific cypher is yields a not
  * interoperable application.
- * */
+ *
+ * Declare LONENCRYPT_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
+ */
+#ifndef LONENCRYPT_HANDLED
 LonApiError LonEncrypt(int index,
                        unsigned inSize, const void* inData,
                        unsigned* const outSize, void** outData)
 {
     return LonApiNvUnsupported;
 }
+#endif /* LONENCRYPT_HANDLED */
 
 /*
  * Callback: LonDecipher
@@ -1060,13 +1203,18 @@ LonApiError LonEncrypt(int index,
  * Note that the provision of application-specific cypher is yields a not
  * interoperable application.
  *
+ * Declare LONDECIPHER_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONDECIPHER_HANDLED
+
 LonApiError LonDecipher(int index,
                         unsigned inSize, const void* inData,
                         unsigned* const outSize, void** outData)
 {
     return LonApiNvUnsupported;
 }
+#endif /* LONDECIPHER_HANDLED */
 #endif  /* LON_NVDESC_ENCRYPT_MASK */
 
 /*
@@ -1087,9 +1235,13 @@ LonApiError LonDecipher(int index,
  * and may render the Micro Server permanently defunct.
  *
  * See ShortStackApi.h for a detailed discussion of this API and its uses.
+ *
+ * Declare LONCUSTOMCOMMUNICATIONPARAMETERS_HANDLED if you provide a compatible
+ * implementation of this event handler elsewhere.
  */
+#ifndef LONCUSTOMCOMMUNICATIONPARAMETERS_HANDLED
 LonBool LonCustomCommunicationParameters(LonByte* const pParameters)
 {
-    return FALSE;   // no communication parameter override
+    return FALSE;   /* no communication parameter override */
 }
-
+#endif /* LONCUSTOMCOMMUNICATIONPARAMETERS_HANDLED */

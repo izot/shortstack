@@ -16,7 +16,18 @@ Driver
 
 The *driver* folder contains a serial link-layer driver implementation shared by all example applications within this folder.
 
+IO
+--
+
+The *io* folder contains some utilities for general purpose I/O on this platform. The GPIO bit I/O is used by the driver module, but applications may also use these routines for application-specific input or output. 
+
+
 Simple Example
 --------------
 
 The *simple* example focusses on the general framework, implementing a very simple example application. Start reviewing the technology with this example. Start reviewing this example with the rpi-simple.c main source file.
+
+Runtime Interface Selection Example
+-----------------------------------
+
+The *ris* example demonstrates an advanced feature, the implementation of an application with runtime interface selection. Start reviewing this example with the rpi-ris.c main source file.

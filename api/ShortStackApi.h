@@ -57,7 +57,7 @@
  * <LonApiError>.
  *
  * Remarks:
- * The function has no parameters.  It returns a <LonApiError> code to indicate
+ * The function returns a <LonApiError> code to indicate
  * success or failure. The function must be called during application
  * initialization, and prior to invoking any other function of the ShortStack
  * LonTalk Compact API.
@@ -65,6 +65,21 @@
  * function completes successfully.
  */
 extern const LonApiError LonInit(LdvCtrl* ctrl);
+
+/*
+ * Function: LonReinit
+ *
+ * Returns:
+ * <LonApiError>
+ *
+ * The function takes no arguments. It is called from within <LonInit>, but
+ * can also be called later during the lifetime of the application in order
+ * to re-initialize the Micro Server and framework without having to restart
+ * the link layer driver.
+ * This is sometimes used by advanced applications which implement pseudo-
+ * dynamic interfaces.
+ */
+extern const LonApiError LonReinit(void);
 
 /*
  * Function: LonExit

@@ -261,4 +261,4 @@ extern LonApiError LdvSuspend(LdvHandle handle, unsigned mode, unsigned timeout)
  */
 extern LonApiError LdvResume(LdvHandle handle);
 
-#endif  //  IZOT_SHORTSTACK_LDV_H
+#endif  /*  IZOT_SHORTSTACK_LDV_H */

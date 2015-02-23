@@ -51,7 +51,8 @@ extern LdvHandle ldv_handle;
 
 const LonApiError VerifyNvIndex(const unsigned nvIndex)
 {
-    return nvIndex < LonNvCount ? LonApiNoError : LonApiNvIndexInvalid;
+    const unsigned nvCount = LonGetNvCount();
+    return nvIndex < nvCount ? LonApiNoError : LonApiNvIndexInvalid;
 }
 
 /***********************************************************************************
@@ -363,6 +364,7 @@ unsigned LonGetTruncatedNvLength(unsigned nvIndex, const LonNvDescription* const
  **********************************************************************************/
 const LonNvDescription* const LonGetNvDescription(const unsigned index)
 {
-    const LonNvDescription* const pNvTable = LonGetNvTable();
+    const LonNvDescription* const pNvTable =
+    		(const LonNvDescription* const)LonGetNvTable();
     return &pNvTable[index];
 }
