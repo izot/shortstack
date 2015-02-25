@@ -64,9 +64,12 @@ LonApiError SendDownlinkRpc(IsiDownlinkRpcCode code, LonByte param1, LonByte par
 }
 
 /*
- * HandleDownlinkRpcAck
+ * HandleUplinkRpcAck
+ *
+ * This function handles an *uplink* ACK or NACK in response to a prior
+ * *downlink* command.
  */
-void HandleDownlinkRpcAck(IsiRpcMessage* pMsg, LonBool bSuccess)
+void HandleUplinkRpcAck(IsiRpcMessage* pMsg, LonBool bSuccess)
 {
     LonByte param1 = pMsg->rpcMsg.Parameters[0];
     LonByte param2 = pMsg->rpcMsg.Parameters[1];

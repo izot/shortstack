@@ -84,13 +84,13 @@ extern const LonApiError IsiStart(IsiType type, IsiStartFlags flags);
 
 /*
  * Function: IsiReturnToFactoryDefaults
- * Restores the device�s self-installation data to factory defaults.
+ * Restores the device's self-installation data to factory defaults.
  *
  * Returns:
  * <LonApiError>.
  *
  * Remarks:
- * This function restores the device�s self-installation data to factory defaults,
+ * This function restores the device's self-installation data to factory defaults,
  * causing the immediate and unrecoverable loss of all connection information.
  * This function has the same functionality regardless of whether the ISI engine
  * is running or not. The engine is stopped and the device resets to complete the

@@ -70,10 +70,16 @@ example includes example-specific documentation. The examples are configured to
 reference other files within the root of this repository, such as files 
 contained in the *api* or *microserver/standard* directories. 
 
-**example/rpi-simple**
+**example/rpi/simple**
 contains a very simple example application with a complete API port and example
 driver for use with the Raspberry Pi mini-computer and the Raspbian Linux operating
-system. 
+system (or a compatible platform). 
+
+**example/rpi/simple-isi**
+contains a simple example application to demonstrate the use of the Interoperable Self-Installation API (ISI) for use with the Raspberry Pi mini-computer and the Raspbian Linux operating system (or a compatible platform).
+
+**example/rpi/ris**
+contains an example for an application implementing runtime interface selection for use with the Raspberry Pi mini-computer and the Raspbian Linux operating system (or a compatible platform).
 
 
 Reporting Bugs and Feedback

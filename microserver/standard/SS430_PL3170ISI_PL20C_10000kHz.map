@@ -1,5 +1,5 @@
 Neuron Linker Version 5.40.02 Copyright (c) Echelon Corporation 1992-2014
-Linked at Thu Feb 19 09:21:35 2015
+Linked at Wed Feb 25 16:02:41 2015
 C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.nxr
 
                        LIST OF MEMORY AREAS
@@ -9,8 +9,8 @@ C:\source\DevTools\ShortStack\dev\microserver\Field Compiler FX\IM\_MicroServer.
 
 SYSTEM IMAGE ROM             0000 5FFF 6000        - RESERVED - 
 
-OnChip  EECODE               8000 828B 028C          - NONE -   
-OnChip  EEPROM (Pool)         - AVAILABLE -       828C 82DF 0054
+OnChip  EECODE               8000 828A 028B          - NONE -   
+OnChip  EEPROM (Pool)         - AVAILABLE -       828B 82DF 0055
 OnChip  EEFAR                82E0 83FF 0120       82E0 82E1 0002
 
 OnChip  RAM    (System)      E800 EF4E 074F          - NONE -   
@@ -40,10 +40,10 @@ EEPROM Usage:  (not necessarily in order of physical layout)
         Application EEPROM Variables       286 bytes
         Library EEPROM Variables            22 bytes
         Application Code and Const Data    360 bytes
-        Library Code and Const Data       2501 bytes
+        Library Code and Const Data       2500 bytes
                                          -----
-        Total EEPROM Requirement          4006 bytes
-        Remaining EEPROM                    90 bytes
+        Total EEPROM Requirement          4005 bytes
+        Remaining EEPROM                    91 bytes
 
 RAM Usage:      (not necessarily in order of physical layout)
         System Data and Parameters         737 bytes
@@ -167,14 +167,14 @@ C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430CPTISI.LIB(L
   Rel shortstack_version      --   --   --      --   --   --     FBDD FBE1 0005
 
 C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430CPTISI.LIB(ISIAPI2):
-  Rel rpcIsBusy               --   --   --      --   --   --     8058 8137 00E0
+  Rel rpcIsBusy               --   --   --      --   --   --     8058 8136 00DF
   Rel %isiRpcSequence         --   --   --     EF63 EFAA 0048     --   --   -- 
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(STOP):
   Rel %IsiStop                --   --   --      --   --   --     FB89 FB96 000E
 
 C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430CPTISI.LIB(ISICTRL):
-  Rel %isiControlledEnrollm   --   --   --      --   --   --     8138 81C6 008F
+  Rel %isiControlledEnrollm   --   --   --      --   --   --     8137 81C5 008F
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(PRESTART):
   Rel %IsiPreStart            --   --   --      --   --   --     FB97 FBAB 0015
@@ -184,7 +184,7 @@ C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430CPTISI.LIB(I
   Rel %MicroServerInit        --   --   --      --   --   --     FBAC FBB2 0007
 
 C:\SOURCE\DEVTOOLS\SHORTSTACK\DEV\MICROSERVER..\..\BIN\SHORTSTACK430CPTISI.LIB(L_SCIPAD):
-  Rel _fast_serial_input_SC   --   --   --      --   --   --     81C7 8253 008D
+  Rel _fast_serial_input_SC   --   --   --      --   --   --     81C6 8252 008D
   Rel SCI_input_pad1          --   --   --      --   --   --     FBCC FBDB 0010
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(APPCHG):
@@ -194,23 +194,23 @@ C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(IMPVER):
   Rel %IsiImplementationVer   --   --   --      --   --   --     FBB7 FBB8 0002
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(VECTORS):
-  Rel _isi_vectors_table      --   --   --      --   --   --     8254 8277 0024
+  Rel _isi_vectors_table      --   --   --      --   --   --     8253 8276 0024
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(ENGSIG):
   Rel %IsiGetEngineSignatur   --   --   --      --   --   --     FBB9 FBBB 0003
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(FSETDOM):
-  Rel %IsiSetDomain           --   --   --      --   --   --     8278 827D 0006
+  Rel %IsiSetDomain           --   --   --      --   --   --     8277 827C 0006
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(DID):
   Rel _%DID%1                 --   --   --      --   --   --     FBBC FBBE 0003
-  Rel %IsiGetPrimaryDid       --   --   --      --   --   --     827E 8289 000C
+  Rel %IsiGetPrimaryDid       --   --   --      --   --   --     827D 8288 000C
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(RPTCNT):
   Rel %IsiGetRepeatCount      --   --   --      --   --   --     FBBF FBC0 0002
 
 C:\PROGRAM FILES (X86)\LONWORKS\NEURONC\LIBRARIES\ISIPL3170.LIB(PERIODIC):
-  Rel %IsiCreatePeriodicMsg   --   --   --      --   --   --     828A 828B 0002
+  Rel %IsiCreatePeriodicMsg   --   --   --      --   --   --     8289 828A 0002
                            SYMBOLS BY ADDRESS
 
 #   0001 _idem_dup                      #   03F2 _memcpy                        
@@ -556,19 +556,19 @@ c   80BE _arbitrary_preempt_safe        #   E9BA _power_line_phase
 #   80FF _nv_all                        #   E9BB _power_line_phase_measured     
 #   80FF _nv_count_mask                 #   E9BC _power_line_frequency          
 #   8100 _size_app_basepg               #   E9BD _zero_crossing_mask            
-#   8138 %isiControlledEnrollment       #   E9BE ops_feature                    
-.   81AE send_ctrp                      #   E9BF _last_retry_extra_time         
-.   81B9 send_response                  #   E9D3 _sys_callback_address          
-#   81C7 _fast_serial_input_SCI_pad     #   E9D5 _larva_L5                      
-#   81C8 _fast_serial_input2_SCI_pad    #   E9D5 BASEPG3                        
-#   8214 delay_22n_cycles               #   E9E0 _dbg_input_is_new              
-#   821D delay_11n_cycles               #   E9E0 input_is_new                   
-#   8223 _fast_serial_output_SCI_pad    #   EF4F %isiType                       
-#   8224 _fast_serial_output2_SCI_pad   #   EF63 %isiRpcSequence                
-#   8254 _isi_vectors_table             #   EF64 %isiRpcReturnValue             
-#   8278 %IsiSetDomain                  #   EF65 %isiRpcReturnData              
-#   827E %IsiGetPrimaryDid              .   EF84 rpc_api_call                   
-#   828A %IsiCreatePeriodicMsg          .   EFAB sp_state                       
+#   8137 %isiControlledEnrollment       #   E9BE ops_feature                    
+.   81AD send_ctrp                      #   E9BF _last_retry_extra_time         
+.   81B8 send_response                  #   E9D3 _sys_callback_address          
+#   81C6 _fast_serial_input_SCI_pad     #   E9D5 _larva_L5                      
+#   81C7 _fast_serial_input2_SCI_pad    #   E9D5 BASEPG3                        
+#   8213 delay_22n_cycles               #   E9E0 _dbg_input_is_new              
+#   821C delay_11n_cycles               #   E9E0 input_is_new                   
+#   8222 _fast_serial_output_SCI_pad    #   EF4F %isiType                       
+#   8223 _fast_serial_output2_SCI_pad   #   EF63 %isiRpcSequence                
+#   8253 _isi_vectors_table             #   EF64 %isiRpcReturnValue             
+#   8277 %IsiSetDomain                  #   EF65 %isiRpcReturnData              
+#   827D %IsiGetPrimaryDid              .   EF84 rpc_api_call                   
+#   8289 %IsiCreatePeriodicMsg          .   EFAB sp_state                       
 c   82E1 _sysram_base_usage             .   EFAC serial_interface_type          
 .   82E2 _%_MICROSERVER%1               .   EFAD neuron_c_env                   
 #   E800 activate_service_led           .   EFB1 loc_hi                         
@@ -687,10 +687,10 @@ c   82E1 _sysram_base_usage             .   EFAC serial_interface_type
 #   5032 %_IsiSendCsmr                  #   4E60 %IsiCancelAcquisition          
 #   4FF2 %_IsiSendCsmx                  #   5156 %IsiCancelEnrollment           
 #   523D %_IsiSendDrum                  #   805E %isiCheckRpc                   
-#   52AE %_IsiSendIsi                   #   8138 %isiControlledEnrollment       
+#   52AE %_IsiSendIsi                   #   8137 %isiControlledEnrollment       
 #   5B27 %_IsiSendNvHb                  #   F35D %IsiCreateCsmo                 
 #   5B4C %_IsiSetDomain                 #   5175 %IsiCreateEnrollment           
-#   EFFC %_isiTcsmr                     #   828A %IsiCreatePeriodicMsg          
+#   EFFC %_isiTcsmr                     #   8289 %IsiCreatePeriodicMsg          
 #   5B8C %_IsiTcsmr                     #   59EE %IsiDeleteEnrollment           
 #   5D58 %_IsiUpdateUi                  #   5172 %IsiExtendEnrollment           
 #   5D54 %_IsiUpdateUiAndState          #   5564 %IsiGetAlias                   
@@ -704,7 +704,7 @@ c   82E1 _sysram_base_usage             .   EFAC serial_interface_type
 #   4B86 %fl_adjust_exp                 #   556A %IsiGetNv                      
 #   4B66 %fl_arg2_zero                  #   F393 %IsiGetNvIndex                 
 #   4B68 %fl_arg3_zero                  #   F3E2 %IsiGetNvValue                 
-#   4803 %fl_cmp                        #   827E %IsiGetPrimaryDid              
+#   4803 %fl_cmp                        #   827D %IsiGetPrimaryDid              
 #   4B79 %fl_compare_exp                #   F371 %IsiGetPrimaryGroup            
 #   4B53 %fl_copy                       #   FBBF %IsiGetRepeatCount             
 #   4B55 %fl_copy1                      #   F3AB %IsiGetWidth                   
@@ -740,7 +740,7 @@ c   82E1 _sysram_base_usage             .   EFAC serial_interface_type
 #   5567 %IsiSetAlias                   #   00BE _arb_presf                     
 #   FBB3 %IsiSetBootLevel               c   80BE _arbitrary_preempt_safe        
 #   F3C6 %IsiSetConnection              #   3490 _bcd2bin                       
-#   8278 %IsiSetDomain                  #   3461 _bin2bcd                       
+#   8277 %IsiSetDomain                  #   3461 _bin2bcd                       
 #   556D %IsiSetNv                      #   1A57 _bit_input                     
 #   5402 %IsiStartDa                    #   46F5 _bit_input_ext                 
 #   F45A %IsiStartRpcTimeout            #   1AB7 _bit_output_ext                
@@ -763,13 +763,13 @@ c   82E1 _sysram_base_usage             .   EFAC serial_interface_type
 #   06D5 _change_state                  #   2FA5 _extended_version_number       
 #   0712 _check_configured              .   F495 _fast_serial_input             
 #   2F47 _checksum_generate             .   F496 _fast_serial_input2            
-#   0BAD _clear_apps_flags              #   81C8 _fast_serial_input2_SCI_pad    
-#   3E3F _compute_phase                 #   81C7 _fast_serial_input_SCI_pad     
+#   0BAD _clear_apps_flags              #   81C7 _fast_serial_input2_SCI_pad    
+#   3E3F _compute_phase                 #   81C6 _fast_serial_input_SCI_pad     
 c   8000 _const_mask                    .   F4A2 _fast_serial_output            
 #   0065 _cpu_halt_check                .   F4A3 _fast_serial_output2           
-#   E947 _cpu_sync                      #   8224 _fast_serial_output2_SCI_pad   
+#   E947 _cpu_sync                      #   8223 _fast_serial_output2_SCI_pad   
 #   3000 _custom_mac                    .   F49B _fast_serial_output2_wait      
-#   E9E0 _dbg_input_is_new              #   8223 _fast_serial_output_SCI_pad    
+#   E9E0 _dbg_input_is_new              #   8222 _fast_serial_output_SCI_pad    
 #   E8CD _dbg_input_value               .   F49C _fast_serial_output_wait       
 #   001C _dealloc                       c   8001 _feature_set_1                 
 #   0052 _dec16                         c   8000 _feature_set_2                 
@@ -850,7 +850,7 @@ c   8001 _extended_onchip_eeprom        #   1A87 _init_io_pins
 #   523D _isi_send_drum                 #   03F5 _memcpy1                       
 #   51C2 _isi_set_prim_domain           #   3402 _memcpy16                      
 #   EFFE _isi_vectors_pointer           #   0668 _memcpy8                       
-#   8254 _isi_vectors_table             c   8001 _memory_forwarding             
+#   8253 _isi_vectors_table             c   8001 _memory_forwarding             
 .   FBDC _isiFirstStart                 #   0404 _memset                        
 #   0483 _iteration16                   #   0405 _memset1                       
 #   0B5D _l_shift16                     #   3415 _memset16                      
@@ -997,9 +997,9 @@ c   8011 _system_version                #   4CE2 camSetLowPower
 #   1B54 _triac_level_output            #   36B0 crc8                           
 #   1B54 _triac_output                  #   46FC cvdd_lvi_enable                
 #   1B4C _triac_pulse_output            #   0478 delay                          
-#   1B2F _triggered_count_output        #   821D delay_11n_cycles               
+#   1B2F _triggered_count_output        #   821C delay_11n_cycles               
 #   0002 _tx_by_addr                    #   0461 delay_1msec                    
-#   03E9 _unpack_nibs                   #   8214 delay_22n_cycles               
+#   03E9 _unpack_nibs                   #   8213 delay_22n_cycles               
 #   272A _update_address                #   3EFC determine_power_line_frequency 
 #   350A _update_record                 .   F008 DIRECTORY                      
 #   35BB _wiegand_input                 .   F7AD do_command_in_processing       
@@ -1087,9 +1087,9 @@ c   8011 _system_version                #   4CE2 camSetLowPower
 .   FBCC SCI_input_pad1                 #   352F update_domain                  
 .   FBD4 SCI_input_pad2                 #   5E2D update_domain_address          
 .   FBD4 SCI_output_pad1                #   34FB update_nv                      
-.   81AE send_ctrp                      #   3585 update_pid                     
+.   81AD send_ctrp                      #   3585 update_pid                     
 .   F95F send_explicit_message          #   357E update_program_id              
-.   81B9 send_response                  .   FA50 update_ram_pointers            
+.   81B8 send_response                  .   FA50 update_ram_pointers            
 .   F567 send_sicb_ul                   #   3596 update_xcvr_id                 
 .   EFAC serial_interface_type          .   F6FD uplink_reset                   
 #   362E service_pin_msg_send           .   EFBA us_flags                       

@@ -37,7 +37,11 @@
  * implementation of <IsiCreatePeriodicMsg>.
  * Do not send any messages, start other network transactions, or call other ISI
  * API functions while the <IsiCreatePeriodicMsg> callback is running.
+ *
+ * Define ISICREATEPERIODICMSG_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISICREATEPERIODICMSG_HANDLED
 LonBool IsiCreatePeriodicMsg(void)
 {
     /*
@@ -46,6 +50,7 @@ LonBool IsiCreatePeriodicMsg(void)
     return FALSE;
 }
 #endif
+#endif
 
 #ifdef ISI_HOST_UPDATEUSERINTERFACE
 /*
@@ -53,7 +58,7 @@ LonBool IsiCreatePeriodicMsg(void)
  * Provides status feedback from the ISI engine.
  *
  * Remarks:
- * These events are useful for synchronizing the device�s user interface with
+ * These events are useful for synchronizing the device's user interface with
  * the ISI engine. To receive notification of ISI status events, override the
  * <IsiUpdateUserInterface> callback function. The default implementation of
  * <IsiUpdateUserInterface> does nothing.
@@ -63,15 +68,20 @@ LonBool IsiCreatePeriodicMsg(void)
  * definition. You can use the event parameter passed to the
  * <IsiUpdateUserInterface> callback function to track the state of the ISI
  * engine. This is a simple way to determine which ISI function calls make sense
- * at any time, and which ones don�t. The function operates whether the ISI
+ * at any time, and which ones don't. The function operates whether the ISI
  * engine is running or not.
+ *
+ * Define ISIUPDATEUSERINTERFACE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIUPDATEUSERINTERFACE_HANDLED
 void IsiUpdateUserInterface(IsiEvent event, unsigned parameter)
 {
     /*
      * TO DO
      */
 }
+#endif
 #endif
 
 #ifdef ISI_HOST_CREATECSMO
@@ -84,7 +94,11 @@ void IsiUpdateUserInterface(IsiEvent event, unsigned parameter)
  * by this function call. This function is called by the ISI engine prior to
  * sending a CSMO message.
  * This function has the same effect if the ISI engine is running or not.
+ *
+ * Define ISICREATECSMO_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISICREATECSMO_HANDLED
 void IsiCreateCsmo(unsigned assembly, IsiCsmoData* pCsmo)
 {
     /*
@@ -92,6 +106,7 @@ void IsiCreateCsmo(unsigned assembly, IsiCsmoData* pCsmo)
      */
     pCsmo = NULL;
 }
+#endif
 #endif
 
 #ifdef ISI_HOST_GETPRIMARYGROUP
@@ -104,7 +119,11 @@ void IsiCreateCsmo(unsigned assembly, IsiCsmoData* pCsmo)
  * only required if the default implementation, or the forwardee, of
  * <IsiCreateCsmo> is in use.
  * The function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETPRIMARYGROUP_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETPRIMARYGROUP_HANDLED
 unsigned IsiGetPrimaryGroup(unsigned assembly)
 {
     /*
@@ -112,6 +131,7 @@ unsigned IsiGetPrimaryGroup(unsigned assembly)
      */
     return ISI_DEFAULT_GROUP;
 }
+#endif
 #endif
 
 #ifdef ISI_HOST_GETASSEMBLY
@@ -131,7 +151,11 @@ unsigned IsiGetPrimaryGroup(unsigned assembly)
  * application. The pointer provided with the *pCsmo* parameter is only valid
  * for the duration of this function call.
  * The function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETASSEMBLY_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETASSEMBLY_HANDLED
 unsigned IsiGetAssembly(const IsiCsmoData* pCsmo, LonBool automatic)
 {
     /*
@@ -139,6 +163,7 @@ unsigned IsiGetAssembly(const IsiCsmoData* pCsmo, LonBool automatic)
      */
     return ISI_NO_ASSEMBLY;
 }
+#endif	/*	ISIGETASSEMBLY_HANDLED */
 #endif
 
 #ifdef ISI_HOST_GETNEXTASSEMBLY
@@ -160,7 +185,11 @@ unsigned IsiGetAssembly(const IsiCsmoData* pCsmo, LonBool automatic)
  * The pointer provided with the *pCsmo* parameter is only valid for the
  * duration of this function call. The function operates whether the ISI engine
  * is running or not.
+ *
+ * Define ISIGETNEXTASSEMBLY_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETNEXTASSEMBLY_HANDLED
 unsigned IsiGetNextAssembly(const IsiCsmoData* pCsmo, LonBool automatic, unsigned assembly)
 {
     /*
@@ -168,12 +197,13 @@ unsigned IsiGetNextAssembly(const IsiCsmoData* pCsmo, LonBool automatic, unsigne
      */
     return ISI_NO_ASSEMBLY;
 }
+#endif	/*	ISIGETNEXTASSEMBLY_HANDLED	*/
 #endif
 
 #ifdef ISI_HOST_GETNVINDEX
 /*
  * Callback:   IsiGetNvIndex
- * Returns the network variable index 0 � 254 of the network variable at the
+ * Returns the network variable index 0 to 254 of the network variable at the
  * specified offset within the specified assembly, or ISI_NO_INDEX if no such
  * network variable exists.
  *
@@ -183,7 +213,11 @@ unsigned IsiGetNextAssembly(const IsiCsmoData* pCsmo, LonBool automatic, unsigne
  * *offset* parameter is zero-based and relates to the selector number offset that
  * is used with the enrollment of this assembly.
  * The function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETNVINDEX_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETNVINDEX_HANDLED
 unsigned IsiGetNvIndex(unsigned assembly, unsigned offset)
 {
     /*
@@ -191,6 +225,7 @@ unsigned IsiGetNvIndex(unsigned assembly, unsigned offset)
      */
     return ISI_NO_INDEX;
 }
+#endif	/*	ISIGETNVINDEX_HANDLED	*/
 #endif
 
 #ifdef ISI_HOST_GETNEXTNVINDEX
@@ -206,7 +241,11 @@ unsigned IsiGetNvIndex(unsigned assembly, unsigned offset)
  * and relates to the selector number offset within the assembly that is
  * used with the enrollment of this assembly.
  * The function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETNEXTNVINDEX_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETNEXTNVINDEX_HANDLED
 unsigned IsiGetNextNvIndex(unsigned assembly, unsigned offset, unsigned previous)
 {
     /*
@@ -214,6 +253,7 @@ unsigned IsiGetNextNvIndex(unsigned assembly, unsigned offset, unsigned previous
      */
     return ISI_NO_INDEX;
 }
+#endif	/* ISIGETNEXTNVINDEX_HANDLED */
 #endif
 
 #ifdef ISI_HOST_GETPRIMARYDID
@@ -237,7 +277,11 @@ unsigned IsiGetNextNvIndex(unsigned assembly, unsigned offset, unsigned previous
  * Many ISI networks do not require an ISI Domain Address Server, however, but
  * use a domain ID assigned by you instead. This is implemented with the this
  * callback. ISI uses a default 3-byte domain ID of "IS\0".
+ *
+ * Define ISIGETPRIMARYDID_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETPRIMARYDID_HANDLED
 const unsigned* IsiGetPrimaryDid(unsigned* pLength)
 {
     /*
@@ -246,6 +290,7 @@ const unsigned* IsiGetPrimaryDid(unsigned* pLength)
     *pLength = 3;
     return "IS\0";
 }
+#endif	/* ISIGETPRIMARYDID_HANDLED */
 #endif
 
 #ifdef ISI_HOST_GETWIDTH
@@ -258,7 +303,11 @@ const unsigned* IsiGetPrimaryDid(unsigned* pLength)
  * with the assembly.
  * Applications must override the <IsiGetWidth> function to support compound
  * assemblies. This function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETWIDTH_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETWIDTH_HANDLED
 unsigned IsiGetWidth(unsigned assembly)
 {
     /*
@@ -266,6 +315,7 @@ unsigned IsiGetWidth(unsigned assembly)
      */
     return 0;
 }
+#endif	/* ISIGETWIDTH_HANDLED */
 #endif
 
 #ifdef ISI_HOST_CONNECTIONTABLE
@@ -283,7 +333,11 @@ unsigned IsiGetWidth(unsigned assembly)
  * connection table size is considered constant following a call to <IsiStart>;
  * you must first stop, then re-start the ISI engine if the connection table size
  * changes dynamically.
+ *
+ * Define ISICONNECTIONTABLE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISICONNECTIONTABLE_HANDLED
 unsigned IsiGetConnectionTableSize(void)
 {
     /*
@@ -303,6 +357,9 @@ unsigned IsiGetConnectionTableSize(void)
  * different size. The ISI engine requests only one connection table entry at a
  * time, and makes no assumption about the pointer value.
  * This function is called frequently, and should return as soon as possible.
+ *
+ * Define ISICONNECTIONTABLE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
 IsiConnection* IsiGetConnection(unsigned index)
 {
@@ -324,6 +381,9 @@ IsiConnection* IsiGetConnection(unsigned index)
  * The ISI engine requests only one connection table entry at a time, and makes
  * no assumption about the pointer value.
  * This function is called frequently, and should return as soon as possible.
+ *
+ * Define ISICONNECTIONTABLE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
 void IsiSetConnection(IsiConnection* pConnection, unsigned index)
 {
@@ -331,6 +391,7 @@ void IsiSetConnection(IsiConnection* pConnection, unsigned index)
      * TO DO
      */
 }
+#endif	/* ISICONNECTIONTABLE_HANDLED */
 #endif
 
 #ifdef ISI_HOST_GETREPEATCOUNT
@@ -346,7 +407,11 @@ void IsiSetConnection(IsiConnection* pConnection, unsigned index)
  * <IsiReturnToFactoryDefaults> runs. Only repeat counts of 1, 2 or 3 are
  * supported. This function has no affect on ISI messages.
  * This function operates whether the ISI engine is running or not.
+ *
+ * Define ISIGETREPEATCOUNT_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETREPEATCOUNT_HANDLED
 const unsigned IsiGetRepeatCount(void)
 {
     /*
@@ -354,6 +419,7 @@ const unsigned IsiGetRepeatCount(void)
      */
     return 0;
 }
+#endif	/* ISIGETREPEATCOUNT_HANDLED */
 #endif
 
 #ifdef ISI_HOST_QUERYHEARTBEAT
@@ -366,7 +432,11 @@ const unsigned IsiGetRepeatCount(void)
  * When network variable heartbeat processing is enabled and the ISI engine
  * is running, the engine queries bound output network variables using this
  * callback (including any alias connections) whenever the heartbeat is due.
+ *
+ * Define ISIQUERYHEARTBEAT_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIQUERYHEARTBEAT_HANDLED
 LonBool IsiQueryHeartbeat(unsigned index)
 {
     /*
@@ -374,6 +444,7 @@ LonBool IsiQueryHeartbeat(unsigned index)
      */
     return FALSE;
 }
+#endif	/* ISIQUERYHEARTBEAT_HANDLED */
 #endif
 
 /*
@@ -383,14 +454,20 @@ LonBool IsiQueryHeartbeat(unsigned index)
  * Remarks:
  * This callback returns the value of the network variable specified by the index
  * nvIndex.
+ *
+ * Define ISIGETNVVALUE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIGETNVVALUE_HANDLED
 const unsigned* IsiGetNvValue(unsigned nvIndex, LonByte* pLength)
 {
-    const LonNvDescription* const nvTable = LonGetNvTable();
+    const LonNvDescription* const nvTable =
+    		(const LonNvDescription* const)LonGetNvTable();
 
     *pLength = nvTable[nvIndex].DeclaredSize;
     return (void*) nvTable[nvIndex].pData;
 }
+#endif	/* ISIGETNVVALUE_HANDLED */
 
 /*
  * Callback:   IsiUserCommand
@@ -401,7 +478,11 @@ const unsigned* IsiGetNvValue(unsigned nvIndex, LonByte* pLength)
  * known to the custom Micro Server alone. This callback can be invoked by such
  * Micro Servers for that purpose. If the host application can't process such
  * an event, it returns a NACK to the Micro Server.
+ *
+ * Define ISIUSERCOMMAND_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIUSERCOMMAND_HANDLED
 unsigned IsiUserCommand(unsigned param1, unsigned param2, const void* pData, unsigned length)
 {
     /*
@@ -409,6 +490,7 @@ unsigned IsiUserCommand(unsigned param1, unsigned param2, const void* pData, uns
      */
     return 0xFF; /* This will result in the API sending a NACK back to the Micro Server */
 }
+#endif /* ISIUSERCOMMAND_HANDLED */
 
 /*
  * Callback:   IsiIsConnectedReceived
@@ -420,13 +502,18 @@ unsigned IsiUserCommand(unsigned param1, unsigned param2, const void* pData, uns
  *
  * Remarks:
  * This callback contains the results of the <IsiQueryIsConnected> function.
+ *
+ * Define ISIISCONNECTEDRECEIVED_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIISCONNECTEDRECEIVED_HANDLED
 void IsiIsConnectedReceived(unsigned assembly, LonBool isConnected)
 {
     /*
      * TO DO
      */
 }
+#endif /* ISIISCONNECTEDRECEIVED_HANDLED */
 
 /*
  * Callback:   IsiImplementationVersionReceived
@@ -438,13 +525,18 @@ void IsiIsConnectedReceived(unsigned assembly, LonBool isConnected)
  * Remarks:
  * This callback contains the results of the <IsiQueryImplementationVersion>
  * function.
+ *
+ * Define ISIIMPLEMENTATIONVERSIONRECEIVED_HANDLED in your project settings
+ * to indicate that you provide this callback outside this module.
  */
+#ifndef ISIIMPLEMENTATIONVERSIONRECEIVED_HANDLED
 void IsiImplementationVersionReceived(unsigned version)
 {
     /*
      * TO DO
      */
 }
+#endif /* ISIIMPLEMENTATIONVERSIONRECEIVED_HANDLED */
 
 /*
  * Callback:   IsiProtocolVersionReceived
@@ -455,13 +547,18 @@ void IsiImplementationVersionReceived(unsigned version)
  *
  * Remarks:
  * This callback contains the results of the <IsiQueryProtocolVersion> function.
+ *
+ * Define ISIPROTOCOLVERSIONRECEIVED_HANDLED in your project settings
+ * to indicate that you provide this callback outside this module.
  */
+#ifndef ISIPROTOCOLVERSIONRECEIVED_HANDLED
 void IsiProtocolVersionReceived(unsigned version)
 {
     /*
      * TO DO
      */
 }
+#endif /* ISIPROTOCOLVERSIONRECEIVED_HANDLED */
 
 /*
  * Callback:   IsiIsRunningReceived
@@ -472,13 +569,18 @@ void IsiProtocolVersionReceived(unsigned version)
  *
  * Remarks:
  * This callback contains the results of the <IsiQueryIsRunning> function.
+ *
+ * Define ISIISRUNNINGRECEIVED_HANDLED in your project settings to
+ * indicate that you provide this callback outside this module.
  */
+#ifndef ISIISRUNNINGRECEIVED_HANDLED
 void IsiIsRunningReceived(LonBool isRunning)
 {
     /*
      * TO DO
      */
 }
+#endif	/* ISIISRUNNINGRECEIVED_HANDLED */
 
 /*
  * Callback:   IsiIsBecomingHostReceived
@@ -491,13 +593,18 @@ void IsiIsRunningReceived(LonBool isRunning)
  *
  * Remarks:
  * This callback contains the results of the <IsiQueryIsBecomingHost> function.
+ *
+ * Define ISIISBECOMINGHOSTRECEIVED_HANDLED in your project settings to
+ * indicate that you provide this callback outside this module.
  */
+#ifndef ISIISBECOMINGHOSTRECEIVED_HANDLED
 void IsiIsBecomingHostReceived(unsigned assembly, LonBool isBecomingHost)
 {
     /*
      * TO DO
      */
 }
+#endif /* ISIISBECOMINGHOSTRECEIVED_HANDLED */
 
 /*
  * Callback:   IsiApiComplete
@@ -515,11 +622,16 @@ void IsiIsBecomingHostReceived(unsigned assembly, LonBool isBecomingHost)
  * and this callback will be invoked with a value of FALSE for the "success"
  * parameter.  Note that the Micro Server is not guaranteed to return ACKs and
  * NACKs in order.
+ *
+ * Define ISIAPICOMPLETE_HANDLED in your project settings to indicate that
+ * you provide this callback outside this module.
  */
+#ifndef ISIAPICOMPLETE_HANDLED
 void IsiApiComplete(IsiDownlinkRpcCode code, LonByte sequence, LonBool success)
 {
     /*
      * TO DO
      */
 }
+#endif /* ISIAPICOMPLETE_HANDLED */
 #endif	// LON_ISI_ENABLED

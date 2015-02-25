@@ -95,7 +95,7 @@ extern const LonApiError WriteNvLocal(const LonByte index, const void* const pDa
 
 #if LON_ISI_ENABLED
 extern LonApiError SendDownlinkRpc(IsiDownlinkRpcCode code, LonByte param1, LonByte param2, void* pData, unsigned len);
-extern void HandleDownlinkRpcAck(IsiRpcMessage* pMsg, LonBool bSuccess);
+extern void HandleUplinkRpcAck(IsiRpcMessage* pMsg, LonBool bSuccess);
 extern void HandleUplinkRpc(IsiRpcMessage* pMsg);
 #endif /* LON_ISI_ENABLED */
 
@@ -835,12 +835,12 @@ void LonEventHandler(void)
 
         case LonIsiNack:
             /* Received a Nack from the Micro Server regarding the Downlink Rpc.*/
-            HandleDownlinkRpcAck((IsiRpcMessage*) pSmipMsg, FALSE);
+            HandleUplinkRpcAck((IsiRpcMessage*) pSmipMsg, FALSE);
             break;
 
         case LonIsiAck:
             /* Received an Ack from the Micro Server regarding the Downlink Rpc.*/
-            HandleDownlinkRpcAck((IsiRpcMessage*) pSmipMsg, TRUE);
+            HandleUplinkRpcAck((IsiRpcMessage*) pSmipMsg, TRUE);
             break;
 
         case LonIsiCmd:

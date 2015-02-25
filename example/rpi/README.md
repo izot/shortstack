@@ -27,6 +27,20 @@ Simple Example
 
 The *simple* example focusses on the general framework, implementing a very simple example application. Start reviewing the technology with this example. Start reviewing this example with the rpi-simple.c main source file.
 
+Simple ISI Example
+------------------
+
+The *simple-isi* example focusses on using the IzoT ShortStack ISI engine and API. The example requires an ISI-enabled Micro Server, for example SS430_FT6050ISI_SYS20000kHz. Start reviewing this example with the rpi-simple-isi.c source file. 
+
+In addition to the general project settings discussed in the Eclipse Configuration document, this example requires that you define the following symbols in your project settings or makefile for all configurations:
+
+ISIGETWIDTH_HANDLED
+ISIGETNVINDEX_HANDLED
+ISIGETASSEMBLY_HANDLED
+ISICREATECSMO_HANDLED
+ISIUPDATEUSERINTERFACE_HANDLED
+
+
 Runtime Interface Selection Example
 -----------------------------------
 
