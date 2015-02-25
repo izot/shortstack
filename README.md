@@ -4,16 +4,16 @@ IzoT (tm) ShortStack Development Kit Release 4.30
 Product Documentation
 ---------------------
 
-Please refer to the *ShortStack User's Guide*, contained in the 
-*doc* directory within this repository, for detailed product documentation.
+Please refer to the *ShortStack User's Guide* for detailed product 
+documentation.
 
 
 Installation
 ------------
 
 Clone this repository, then review the installation instructions and 
-other considerations in the *ShortStack Users' Guide*, found in the 
-*doc* directory within this repository.
+other considerations in the *ShortStack Users' Guide*.
+
 
 
 Change History
