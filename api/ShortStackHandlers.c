@@ -70,7 +70,7 @@ extern unsigned LonGetNvCount();
  */
 /* #define LON_NVD_FILEIO "myApp.nvd" */
 #if defined(LON_NVD_FILEIO)
-	/* Add a stringification macro definition */
+/* Add a stringification macro definition */
 #	define STRINGIFY(name)	STRING(name)
 #	define STRING(name)		#name
 #	define LON_NVD_FILENAME	STRINGIFY(LON_NVD_FILEIO)
@@ -111,9 +111,9 @@ extern unsigned LonGetNvCount();
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonResetOccurred(const LonResetNotification* const pResetNotification)
 {
-    /*
-     * TO DO: implement application-specific reset processing.
-     */
+	/*
+	 * TO DO: implement application-specific reset processing.
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -128,9 +128,9 @@ void LonResetOccurred(const LonResetNotification* const pResetNotification)
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonWink(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /*  LON_FRAMEWORK_TYPE_III */
 
@@ -151,9 +151,9 @@ void LonWink(void)
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonOffline(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -174,9 +174,9 @@ void LonOffline(void)
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonOnline(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -191,9 +191,9 @@ void LonOnline(void)
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonServicePinPressed(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -214,9 +214,9 @@ void LonServicePinPressed(void)
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonServicePinHeld(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -247,8 +247,8 @@ void LonServicePinHeld(void)
  */
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonNvUpdateOccurred(
-    const unsigned index,
-    const LonReceiveAddress* const pSourceAddress
+		const unsigned index,
+		const LonReceiveAddress* const pSourceAddress
 )
 {
 }
@@ -274,9 +274,9 @@ void LonNvUpdateOccurred(
 #ifndef LON_FRAMEWORK_TYPE_III
 void LonNvUpdateCompleted(const unsigned index, const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif  /* LON_FRAMEWORK_TYPE_III */
 
@@ -311,31 +311,95 @@ void LonNvUpdateCompleted(const unsigned index, const LonBool success)
 #ifndef LON_FRAMEWORK_TYPE_III
 const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
 {
-    unsigned size = 0;
-    const LonNvDescription* const pNvTable =
-    		(const LonNvDescription* const )LonGetNvTable();
+	unsigned size = 0;
+	const LonNvDescription* const pNvTable =
+	(const LonNvDescription* const )LonGetNvTable();
 
-    if (LON_GET_ATTRIBUTE(pNvTable[nvIndex], LON_NVDESC_CHANGEABLE)) {
-        /*
-         * TO DO: Supply the current size of this network variable.
-         * The current size can typically be found in the associated
-         * SCPTnvType configuration property.
-         * Note the NvTable holds the network variable's declared
-         * size, which equals its maximum size, but not necessarily
-         * its current size.
-         */
+	if (LON_GET_ATTRIBUTE(pNvTable[nvIndex], LON_NVDESC_CHANGEABLE)) {
+		/*
+		 * TO DO: Supply the current size of this network variable.
+		 * The current size can typically be found in the associated
+		 * SCPTnvType configuration property.
+		 * Note the NvTable holds the network variable's declared
+		 * size, which equals its maximum size, but not necessarily
+		 * its current size.
+		 */
 
-    } else {
-        /*
-         * For not changeable network variables, the declared
-         * size held in the table also equals the current size.
-         */
-        size = LonGetDeclaredNvSize(nvIndex);
-    }
+	} else {
+		/*
+		 * For not changeable network variables, the declared
+		 * size held in the table also equals the current size.
+		 */
+		size = LonGetDeclaredNvSize(nvIndex);
+	}
 
-    return size;
+	return size;
 }
 #endif  /*  LON_FRAMEWORK_TYPE_III */
+
+#if !defined(LONNVDSERIALIZENVS_HANDLED) || !defined(LONNVDDESERIALIZENVS_HANDLED)
+/*
+ * Function: TransactionControl
+ * Updates the transaction control file with a new value and
+ * returns the previous value.
+ *
+ * Parameters:
+ * value - new transaction control value or -2 (do not write)
+ *
+ * Returns:
+ * previous transaction control value or -2 (none found)
+ *
+ * Remarks:
+ * The LonNvdSerializeNvs function sets the transaction control value to 1 (one)
+ * before beginning to write data to persistent data storage. When finished, the
+ * function sets the transaction control value to 0 (zero). This indicates that
+ * the serialization of persistent items to persistent data storage has been
+ * completed.
+ * The LonNvdDeserializeNvs function reads the transaction control value prior
+ * to reading data from the persistent data storage. When the transaction control
+ * value is anything but 0 (zero), persistent data is considered invalid.
+ * This would be the case if a power cycle or physical reset occurs before the
+ * writing of persistent data completes.
+ *
+ * The transaction control data fetch-and-write operation should be atomic, safe
+ * and fast, but for targets which do not support suitable facilities (such as
+ * on-chip EEPROM memory with dedicated machine instructions), a small file on
+ * the file system can be used.
+ *
+ */
+typedef signed TransactionControlType;
+#define TX_CONTROL_NIL	(-2)	/* don't change transaction control value */
+#define TX_CONTROL_NONE (-1)	/* no transaction control file */
+#define TX_CONTROL_IDLE (0)		/* transaction is idle */
+#define TX_CONTROL_BUSY (1)		/* transaction in progress */
+#define LON_NVD_TXNAME	STRINGIFY(LON_NVD_FILEIO.tx)
+
+static TransactionControlType TransactionControl(TransactionControlType value)
+{
+	TransactionControlType result = TX_CONTROL_NIL;
+	int fd = open(
+		LON_NVD_TXNAME,
+		// ###TODO: Consider including O_DIRECT if your target supports it.
+		// O_DIRECT minimizes the effects of a file I/O cache.
+        O_RDWR | O_CREAT, S_IRUSR | S_IWUSR
+    );
+
+	if (fd != -1) {
+		if (read(fd, &result, sizeof(result)) != sizeof(result)) {
+			result = TX_CONTROL_NIL;
+		}
+		if (value != TX_CONTROL_NIL) {
+			lseek(fd, 0, SEEK_SET);
+			write(fd, &value, sizeof(value));
+			close(fd);
+		}
+	} else {
+		result = TX_CONTROL_NONE;
+	}
+
+	return result;
+}
+#endif
 
 /*
  * Callback: LonNvdSerializeNvs
@@ -353,73 +417,107 @@ const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
  * implementation of this event handler elsewhere.
  */
 #ifndef LONNVDSERIALIZENVS_HANDLED
-const LonApiError LonNvdSerializeNvs(void)
-{
+const LonApiError LonNvdSerializeNvs(void) {
 #if LON_PERSISTENT_NVS
-
 #ifdef LON_NVD_FILEIO
-    LonApiError result = LonApiNoError;
-    int fd = open(
-				LON_NVD_FILENAME,
-				O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR
-			);
 
-    if (fd == -1) {
-        result = LonApiNvdFileError;
-    } else {
-        int index = 0;
-        const LonNvDescription* pNvDescription =
-        		(const LonNvDescription*)LonGetNvTable();
+	LonApiError result = LonApiNoError;
+	TransactionControl(TX_CONTROL_BUSY);
+	{
+		int fd = open(
+			LON_NVD_FILENAME,
+			O_WRONLY | O_CREAT | O_TRUNC, S_IRUSR | S_IWUSR
+		);
 
-        /*
-         * Write the application signature first. This is read and
-         * validated by LonNvdDeserializeNvd to ensure that the data
-         * kept on file matches the exact set of this interface.
-         */
-        const LonUbits32 signature = LonGetSignature();
-        const unsigned nvCount = LonGetNvCount();
+		if (fd == -1) {
+			result = LonApiNvdFileError;
+		} else {
+			int index = 0;
+			const LonNvDescription* pNvDescription =
+					(const LonNvDescription*) LonGetNvTable();
 
-        if (write(fd, &signature, sizeof(signature)) != sizeof(signature)) {
-            result = LonApiNvdFailure;
-        }
+			/*
+			 * Write the application signature first. This is read and
+			 * validated by LonNvdDeserializeNvd to ensure that the data
+			 * kept on file matches the exact set of this interface.
+			 */
+			const LonUbits32 signature = LonGetSignature();
+			const unsigned nvCount = LonGetNvCount();
 
-        while (index < nvCount && result == LonApiNoError) {
-            unsigned length = LonGetCurrentNvSize(index);
+			if (write(fd, &signature, sizeof(signature)) != sizeof(signature)) {
+				result = LonApiNvdFailure;
+			}
 
-            if (length && length != (unsigned) - 1) {
-                if (write(fd, (void*)pNvDescription->pData, length) != length) {
-                    result = LonApiNvdFailure;
-                }
-            } else {
-                result = LonApiNvdSizeNotSupported;
-            }
+			while (index < nvCount && result == LonApiNoError) {
+				if (pNvDescription->Attributes & LON_NVDESC_PERSISTENT_MASK) {
+					unsigned length = LonGetCurrentNvSize(index);
 
-            ++index;
-            ++pNvDescription;
-        }
+					if (length && length != (unsigned) -1) {
+						if (write(fd, (void*) pNvDescription->pData, length) != length) {
+							result = LonApiNvdFailure;
+						}
+					} else {
+						result = LonApiNvdSizeNotSupported;
+					}
+				}
+				++index;
+				++pNvDescription;
+			}
 
-        /* Let's try to close the file even if an error occurred, but
-         * preserve the original error if the close call also fails.
-         */
-        if (close(fd) == -1) {
-            if (result == LonApiNoError) {
-                result = LonApiNvdFailure;
-            }
-        }
-    }
+			if (result == LonApiNoError) {
+				/* Write the modifiable value file, if any. */
+				unsigned size = 0;
+				void* file_data = LonGetFile(LON_DMF_FILEINDEX_MODIFIABLE, &size);
 
+				if (file_data) {
+					if (write(fd, file_data, size) != size) {
+						result = LonApiNvdFailure;
+					}
+				}
+			}
+
+			if (result == LonApiNoError) {
+				/* Write the read-only value file, if any.
+				 * Note the "read only value file" is "read only" from the network
+				 * tool's standpoint of view. While this file often contains
+				 * constant data such as version numbers, device-specific properties
+				 * may also exist within the read-only file, and may be written by
+				 * the application under appropriate conditions.
+				 */
+				unsigned size = 0;
+				void* file_data = LonGetFile(LON_DMF_FILEINDEX_READONLY, &size);
+
+				if (file_data) {
+					if (write(fd, file_data, size) != size) {
+						result = LonApiNvdFailure;
+					}
+				}
+			}
+
+			/* Let's try to close the file even if an error occurred, but
+			 * preserve the original error if the close call also fails.
+			 */
+			fsync(fd);
+			if (close(fd) == -1) {
+				if (result == LonApiNoError) {
+					result = LonApiNvdFailure;
+				}
+			}
+		}
+	}
+	TransactionControl(TX_CONTROL_IDLE);
 #else
-    LonApiError result = LonApiInitializationFailure;
+	LonApiError result = LonApiInitializationFailure;
 #endif  /* LON_NVD_FILEIO */
 
-    return result;
+	return result;
 #else
-    /*
-     * This application implements no eeprom network variables or
-     * configuration network variables.
-     * No change to this code is needed
-     */
-    return LonApiNoError;
+	/*
+	 * This application implements no eeprom network variables or
+	 * configuration network variables.
+	 * No change to this code is needed
+	 */
+	return LonApiNoError;
 #endif  /* LON_PERSISTENT_NVS */
 }
 #endif /* LONNVDSERIALIZENVS_HANDLED */
@@ -439,83 +537,118 @@ const LonApiError LonNvdSerializeNvs(void)
  * implementation of this event handler elsewhere.
  */
 #ifndef LONNVDDESERIALIZENVS_HANDLED
-const LonApiError LonNvdDeserializeNvs(void)
-{
+const LonApiError LonNvdDeserializeNvs(void) {
 #if LON_PERSISTENT_NVS
 #if defined(LON_NVD_FILEIO)
-    LonApiError result = LonApiNoError;
-    int fd = open(LON_NVD_FILENAME, O_RDONLY);
+	LonApiError result = LonApiNoError;
+	TransactionControlType txControl = TransactionControl(TX_CONTROL_NIL);
 
-    if (fd == -1) {
-        if (errno != ENOENT) {
-            /*
-             * Failure to open the NVD file is OK in case of ENOENT (the file
-             * does not exist). Other open failure are a genuine error for
-             * this application.
-             */
-            result = LonApiNvdFileError;
-        }
-    } else {
-        int index = 0;
-        const LonNvDescription* pNvDescription =
-        		(const LonNvDescription*) LonGetNvTable();
+	if (txControl == TX_CONTROL_BUSY) {
+		result = LonApiNvdFailure;
+	} else if (txControl != TX_CONTROL_NONE) {
+		int fd = open(LON_NVD_FILENAME, O_RDONLY);
 
-        /*
-         * Write the application signature first. This is read and validated
-         * by LonNvdDeserializeNvd to ensure that the data kept on file matches
-         * the exact set of this interface. The framework generator tools
-         * (LID, III) generate a 16-bit signature at this time. This code here
-         * is prepared for a possible future expansion to a 32-bit signature
-         * value.
-         */
-        LonUbits32 signature = 0;
-        const unsigned nvCount = LonGetNvCount();
+		if (fd == -1) {
+			if (errno != ENOENT) {
+				/*
+				 * Failure to open the NVD file is OK in case of ENOENT (the file
+				 * does not exist). Other open failure are a genuine error for
+				 * this application.
+				 */
+				result = LonApiNvdFileError;
+			}
+		} else {
+			int index = 0;
+			const LonNvDescription* pNvDescription =
+					(const LonNvDescription*) LonGetNvTable();
 
-        if (read(fd, &signature, sizeof(signature)) != sizeof(signature)) {
-            result = LonApiNvdFailure;
-        } else if (signature != LonGetSignature()) {
-            /* The file applies to a different application. We accept this as
-             * not an error (the application may have rightfully changed),
-             * but we must ignore the file's content.
-             */
-            result = LonApiNoError;
-        } else while (index < nvCount && result == LonApiNoError) {
-                unsigned length = LonGetCurrentNvSize(index);
+			/*
+			 * Write the application signature first. This is read and validated
+			 * by LonNvdDeserializeNvd to ensure that the data kept on file matches
+			 * the exact set of this interface. The framework generator tools
+			 * (LID, III) generate a 16-bit signature at this time. This code here
+			 * is prepared for a possible future expansion to a 32-bit signature
+			 * value.
+			 */
+			LonUbits32 signature = 0;
+			const unsigned nvCount = LonGetNvCount();
 
-                if (length && length != (unsigned) - 1) {
-                    if (read(fd, (void*)pNvDescription->pData, length) != length) {
-                        result = LonApiNvdFailure;
-                    }
-                } else {
-                    result = LonApiNvdSizeNotSupported;
-                }
+			if (read(fd, &signature, sizeof(signature)) != sizeof(signature)) {
+				result = LonApiNvdFailure;
+			} else if (signature != LonGetSignature()) {
+				/* The file applies to a different application. We accept this as
+				 * not an error (the application may have rightfully changed),
+				 * but we must ignore the file's content.
+				 */
+				result = LonApiNoError;
+			} else {
+				while (index < nvCount && result == LonApiNoError) {
+					if (pNvDescription->Attributes & LON_NVDESC_PERSISTENT_MASK) {
+						unsigned length = LonGetCurrentNvSize(index);
 
-                ++index;
-                ++pNvDescription;
-            }
+						if (length && length != (unsigned) -1) {
+							if (read(fd, (void*) pNvDescription->pData, length) != length) {
+								result = LonApiNvdFailure;
+							}
+						} else {
+							result = LonApiNvdSizeNotSupported;
+						}
+					}
+					++index;
+					++pNvDescription;
+				}
 
-        /* Let's try to close the file even if an error occurred, but
-         * preserve the original error if the close call also fails.
-         */
-        if (close(fd) == -1) {
-            if (result == LonApiNoError) {
-                result = LonApiNvdFailure;
-            }
-        }
-    }
+				if (result == LonApiNoError) {
+					/* Update the modifiable value file, if any. */
+					unsigned size = 0;
+					void* file_data = LonGetFile(LON_DMF_FILEINDEX_MODIFIABLE, &size);
+
+					if (file_data) {
+						if (read(fd, file_data, size) != size) {
+							result = LonApiNvdFailure;
+						}
+					}
+				}
+
+				if (result == LonApiNoError) {
+					/* Update the read-only value file, if any.
+					 * See LonNvdSerializeNvs() for a comment discussing the nature
+					 * of the "read only" value file.
+					 */
+					unsigned size = 0;
+					void* file_data = LonGetFile(LON_DMF_FILEINDEX_READONLY, &size);
+
+					if (file_data) {
+						if (read(fd, file_data, size) != size) {
+							result = LonApiNvdFailure;
+						}
+					}
+				}
+			}
+
+			/* Let's try to close the file even if an error occurred, but
+			 * preserve the original error if the close call also fails.
+			 */
+			if (close(fd) == -1) {
+				if (result == LonApiNoError) {
+					result = LonApiNvdFailure;
+				}
+			}
+		}
+	}
 
 #else
-    LonApiError result = LonApiInitializationFailure;
+	LonApiError result = LonApiInitializationFailure;
 #endif  /* LON_STD_FILEIO */
 
-    return result;
+	return result;
 #else
-    /*
-     * This application implements no eeprom network variables or
-     * configuration network variables.
-     * No change to this code is needed
-     */
-    return LonApiNoError;
+	/*
+	 * This application implements no eeprom network variables or
+	 * configuration network variables.
+	 * No change to this code is needed
+	 */
+	return LonApiNoError;
 #endif  /* LON_PERSISTENT_NVS */
 }
 #endif	/*	LONNVDDESERIALIZENVS_HANDLED	*/
@@ -549,19 +682,19 @@ const LonApiError LonNvdDeserializeNvs(void)
  */
 #ifndef LONMSGARRIVED_HANDLED
 void LonMsgArrived(
-    const LonReceiveAddress* const pAddress,
-    const LonCorrelator correlator,
-    const LonBool priority,
-    const LonServiceType serviceType,
-    const LonBool authenticated,
-    const LonByte code,
-    const LonByte* const pData,
-    const unsigned dataLength
+		const LonReceiveAddress* const pAddress,
+		const LonCorrelator correlator,
+		const LonBool priority,
+		const LonServiceType serviceType,
+		const LonBool authenticated,
+		const LonByte code,
+		const LonByte* const pData,
+		const unsigned dataLength
 )
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONMSGARRIVED_HANDLED */
 
@@ -585,16 +718,16 @@ void LonMsgArrived(
  */
 #ifndef LONRESPONSEARRIVED_HANDLED
 void LonResponseArrived(
-    const LonResponseAddress* const pAddress,
-    const unsigned tag,
-    const LonByte code,
-    const LonByte* const pData,
-    const unsigned dataLength
+		const LonResponseAddress* const pAddress,
+		const unsigned tag,
+		const LonByte code,
+		const LonByte* const pData,
+		const unsigned dataLength
 )
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONRESPONSEARRIVED_HANDLED	*/
 
@@ -625,9 +758,9 @@ void LonResponseArrived(
 #ifndef LONMSGCOMPLETED_HANDLED
 void LonMsgCompleted(const unsigned tag, const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONMSGCOMPLETED_HANDLED */
 
@@ -656,11 +789,11 @@ void LonMsgCompleted(const unsigned tag, const LonBool success)
  */
 #ifndef LONDOMAINCONFIGRECEIVED_HANDLED
 void LonDomainConfigReceived(const LonDomain* const pDomain,
-                             const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONDOMAINCONFIGRECEVIED_HANDLED */
 
@@ -684,11 +817,11 @@ void LonDomainConfigReceived(const LonDomain* const pDomain,
  */
 #ifndef LONNVCONFIGRECEIVED_HANDLED
 void LonNvConfigReceived(const LonNvConfig* const pNvConfig,
-                         const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONNVCONFIGRECEIVED_HANDLED */
 
@@ -713,11 +846,11 @@ void LonNvConfigReceived(const LonNvConfig* const pNvConfig,
  */
 #ifndef LONALIASCONFIGRECEIVED_HANDLED
 void LonAliasConfigReceived(const LonAliasConfig* const pAliasConfig,
-                            const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONALIASCONFIGRECEIVED_HANDLED */
 
@@ -741,11 +874,11 @@ void LonAliasConfigReceived(const LonAliasConfig* const pAliasConfig,
  */
 #ifndef LONADDRESSCONFIGRECEIVED_HANDLED
 void LonAddressConfigReceived(const LonAddress* const pAddress,
-                              const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONADDRESSCONFIGRECEIVED_HANDLED */
 
@@ -770,11 +903,11 @@ void LonAddressConfigReceived(const LonAddress* const pAddress,
  */
 #ifndef LONCONFIGDATARECEIVED_HANDLED
 void LonConfigDataReceived(const LonConfigData* const pConfigData,
-                           const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONCONFIGDATARECEIVED_HANDLED */
 
@@ -799,9 +932,9 @@ void LonConfigDataReceived(const LonConfigData* const pConfigData,
 #ifndef LONSTATUSRECEIVED_HANDLED
 void LonStatusReceived(const LonStatus* const pStatus, const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONSTATUSRECEIVED_HANDLED */
 
@@ -830,17 +963,69 @@ void LonStatusReceived(const LonStatus* const pStatus, const LonBool success)
  */
 #ifndef LONTRANSCEIVERSTATUSRECEIVED_HANDLED
 void LonTransceiverStatusReceived(const LonTransceiverParameters* const pStatus,
-                                  const LonBool success)
+		const LonBool success)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONTRANSCEIVERSTATUSRECEIVED_HANDLED */
 
 #endif /* LON_NM_QUERY_FUNCTIONS */
 
 #if LON_DMF_ENABLED
+
+/*
+ * Callback: LonTranslateWinodwArea
+ * Translate a DMF address to a host address.
+ *
+ * Parameters:
+ * dmfAddress - the DMF address, in host byte order
+ * size - size of the DMF chunk, in bytes
+ *
+ * Result:
+ * Host address to read from or write to, or NULL if none.
+ *
+ * DMF transfers use an alleged address within the Smart Transceiver's 64 KB
+ * address space. Supported addresses are described by LON_DMF_WINDOW_START
+ * and LON_DMF_WINDOW_SIZE. The file directory, template and value files are
+ * projected to appear within that window. The LonTranslateWindowArea returns
+ * the host-side memory address corresponding to the given DMF address and
+ * data size, or returns NULL.
+ *
+ * Note that this function does not support read or write access across file
+ * boundaries.
+ *
+ * You can supply your own implementation of this callback function by editing
+ * the default implementation provided below, or by providing a compatible
+ * function elsewhere and defining the LONTRANSLATEWINDOWSAREA_HANDLED symbol.
+ */
+
+#ifndef LONTRANSLATEWINDOWSAREA_HANDLED
+void* LonTranslateWindowArea(unsigned dmfAddress, unsigned size)
+{
+	void* result = NULL;
+	signed dmfOffset = (int)dmfAddress - LON_DMF_WINDOW_START;
+	signed segBase = 0;
+	int i = LON_DMF_FILEINDEX_DIRECTORY;
+
+	while (i <= LON_DMF_FILEINDEX_MAXINDEX) {
+		unsigned segSize = 0;
+		char* segAddr = (char*)LonGetFile(i, &segSize);
+
+		if (segAddr
+		&& dmfOffset >= segBase
+		&& dmfOffset + size <= segBase + segSize) {
+			result = segAddr + dmfOffset - segBase;
+			break;
+		}
+		segBase += segSize;
+		++i;
+	}
+
+	return result;
+}
+#endif	/* LONTRANSLATEWINDOWSAREA_HANDLED */
 
 /*
  * Callback: LonMemoryRead
@@ -866,26 +1051,15 @@ void LonTransceiverStatusReceived(const LonTransceiverParameters* const pStatus,
 #ifndef LONMEMORYREAD_HANDLED
 const LonApiError LonMemoryRead(const unsigned address, const unsigned size, void* const pData)
 {
-    char* pHostAddress = NULL;
-    LonMemoryDriver driver = LonMemoryDriverUnknown;
-    LonApiError result = LonTranslateWindowArea(FALSE, address, size, &pHostAddress, &driver);
+	LonApiError result = LonApiNoError;
+	char* pHostAddress = LonTranslateWindowArea(address, size);
 
-    if (result == LonApiNoError) {
-        if (driver == LonMemoryDriverStandard) {
-            (void) memcpy(pData, pHostAddress, size);
-        } else {
-            /*
-             * TO DO: add code to support alternative data storage,
-             * such as using paged memory, or serial interface memory
-             * devices such as IIC EEPROM devices. When completing
-             * with success, return LonApiNoError.
-             */
-
-            result = LonApiDmfNoDriver;
-        }
-    }
-
-    return result;
+	if (pHostAddress) {
+		memcpy(pData, pHostAddress, size);
+	} else {
+		result = LonApiDmfOutOfRange;
+	}
+	return result;
 }
 #endif /* LONMEMORYREAD_HANDLED */
 
@@ -912,26 +1086,16 @@ const LonApiError LonMemoryRead(const unsigned address, const unsigned size, voi
 #ifndef LONMEMORYWRITE_HANDLED
 const LonApiError LonMemoryWrite(const unsigned address, const unsigned size, const void* const pData)
 {
-    char* pHostAddress = NULL;
-    LonMemoryDriver driver = LonMemoryDriverUnknown;
-    LonApiError result = LonTranslateWindowArea(TRUE, address, size, &pHostAddress, &driver);
+	LonApiError result = LonApiNoError;
+	char* pHostAddress = LonTranslateWindowArea(address, size);
 
-    if (result == LonApiNoError) {
-        if (driver == LonMemoryDriverStandard) {
-            (void) memcpy(pHostAddress, pData, size);
-        } else {
-            /*
-             * TO DO: add code to support alternative data storage,
-             * such as using paged memory, or serial interface memory
-             * devices such as IIC EEPROM devices. When completing
-             * with success, return LonApiNoError.
-             */
-
-            result = LonApiDmfNoDriver;
-        }
-    }
-
-    return result;
+	if (pHostAddress) {
+		memcpy(pHostAddress, pData, size);
+		result = LonNvdSerializeNvs();
+	} else {
+		result = LonApiDmfOutOfRange;
+	}
+	return result;
 }
 #endif /* LONMEMORYWRITE_HANDLED */
 #endif  /* LON_DMF_ENABLED */
@@ -953,9 +1117,9 @@ const LonApiError LonMemoryWrite(const unsigned address, const unsigned size, co
 #ifndef LONPINGRECEIVED_HANDLED
 void LonPingReceived(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONPINGRECEIVED_HANDLED */
 
@@ -979,9 +1143,9 @@ void LonPingReceived(void)
 #ifndef LONNVISBOUNDRECEIVED_HANDLED
 void LonNvIsBoundReceived(const unsigned index, const LonBool bound)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONNVISBOUNDRECEIVED_HANDLED */
 
@@ -1005,9 +1169,9 @@ void LonNvIsBoundReceived(const unsigned index, const LonBool bound)
 #ifndef LONMTISBOUNDRECEIVED_HANDLED
 void LonMtIsBoundReceived(const unsigned index, const LonBool bound)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONMTISBOUNDRECEIVED_HANDLED */
 
@@ -1027,9 +1191,9 @@ void LonMtIsBoundReceived(const unsigned index, const LonBool bound)
 #ifndef LONGOUNCONFIGUREDRECEIVED_HANDLED
 void LonGoUnconfiguredReceived(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif	/* LONGOUNCONFIGUREDRECEIVED_HANDLED */
 
@@ -1050,9 +1214,9 @@ void LonGoUnconfiguredReceived(void)
 #ifndef LONGOCONFIGUREDRECEIVED_HANDLED
 void LonGoConfiguredReceived(void)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONGOCONFIGUREDRECEIVED_HANDLED */
 
@@ -1076,9 +1240,9 @@ void LonGoConfiguredReceived(void)
 #ifndef LONAPPSIGNATURERECEIVED_HANDLED
 void LonAppSignatureReceived(LonWord appSignature)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONAPPSIGNATURERECEIVED_HANDLED */
 
@@ -1103,11 +1267,11 @@ void LonAppSignatureReceived(LonWord appSignature)
  */
 #ifndef LONVERSIONRECEIVED_HANDLED
 void LonVersionReceived(unsigned appMajor, unsigned appMinor, unsigned appBuild,
-                        unsigned coreMajor, unsigned coreMinor, unsigned coreBuild)
+		unsigned coreMajor, unsigned coreMinor, unsigned coreBuild)
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONVERSIONRECEIVED_HANDLED */
 
@@ -1135,9 +1299,9 @@ void LonVersionReceived(unsigned appMajor, unsigned appMinor, unsigned appBuild,
 #ifndef LONECHORECEIVED_HANDLED
 void LonEchoReceived(const LonByte data[LON_ECHO_SIZE])
 {
-    /*
-     * TO DO
-     */
+	/*
+	 * TO DO
+	 */
 }
 #endif /* LONECHORECEIVED_HANDLED */
 #endif  /* LON_UTILITY_FUNCTIONS */
@@ -1172,10 +1336,10 @@ void LonEchoReceived(const LonByte data[LON_ECHO_SIZE])
  */
 #ifndef LONENCRYPT_HANDLED
 LonApiError LonEncrypt(int index,
-                       unsigned inSize, const void* inData,
-                       unsigned* const outSize, void** outData)
+		unsigned inSize, const void* inData,
+		unsigned* const outSize, void** outData)
 {
-    return LonApiNvUnsupported;
+	return LonApiNvUnsupported;
 }
 #endif /* LONENCRYPT_HANDLED */
 
@@ -1209,10 +1373,10 @@ LonApiError LonEncrypt(int index,
 #ifndef LONDECIPHER_HANDLED
 
 LonApiError LonDecipher(int index,
-                        unsigned inSize, const void* inData,
-                        unsigned* const outSize, void** outData)
+		unsigned inSize, const void* inData,
+		unsigned* const outSize, void** outData)
 {
-    return LonApiNvUnsupported;
+	return LonApiNvUnsupported;
 }
 #endif /* LONDECIPHER_HANDLED */
 #endif  /* LON_NVDESC_ENCRYPT_MASK */
@@ -1240,8 +1404,7 @@ LonApiError LonDecipher(int index,
  * implementation of this event handler elsewhere.
  */
 #ifndef LONCUSTOMCOMMUNICATIONPARAMETERS_HANDLED
-LonBool LonCustomCommunicationParameters(LonByte* const pParameters)
-{
-    return FALSE;   /* no communication parameter override */
+LonBool LonCustomCommunicationParameters(LonByte* const pParameters) {
+	return FALSE; /* no communication parameter override */
 }
 #endif /* LONCUSTOMCOMMUNICATIONPARAMETERS_HANDLED */

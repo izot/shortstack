@@ -45,3 +45,9 @@ Runtime Interface Selection Example
 -----------------------------------
 
 The *ris* example demonstrates an advanced feature, the implementation of an application with runtime interface selection. Start reviewing this example with the rpi-ris.c main source file.
+
+
+Properties Example
+------------------
+
+The *rpi-proerties* example demonstrates implementing properties in property files, specifying and overriding the global property implementation policy. The example also demonstrates use of two properties within the application's algorithm. 
