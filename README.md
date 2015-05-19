@@ -81,6 +81,9 @@ contains a simple example application to demonstrate the use of the Interoperabl
 **example/rpi/ris**
 contains an example for an application implementing runtime interface selection for use with the Raspberry Pi mini-computer and the Raspbian Linux operating system (or a compatible platform).
 
+**example/rpi/properties**
+contains an example for an application which implements properties in property files. The example also demonstrates the initialization of complex property types, and demonstrates the use of properties for a configurable value range limitation. 
+
 
 Reporting Bugs and Feedback
 ---------------------------
