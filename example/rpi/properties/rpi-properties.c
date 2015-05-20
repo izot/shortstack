@@ -131,9 +131,24 @@ SFPTclosedLoopActuator(volt, SNVT_volt) driver[2];  //@izot block external("volt
  * each of the scenes. Only the first four fields in each scene definition are
  * assigned; the default values defined in the resources apply to the remaining
  * fields for each scene. Note that this behaviour differs from standard C/C++
- * behavior. In C/C++ the remainder of a partially initialized aggregrate type
- * is filled with 0x00. The IzoT Interface Interprefer fills the remainder with
+ * behavior. In C/C++, the remainder of a partially initialized aggregate type
+ * is filled with 0x00. The IzoT Interface Interpreter fills the remainder with
  * the default values as defined in the resources, which could be non-zero.
+ *
+ * Note that the implementation of the UFTPiotLoad profile is incomplete and not
+ * interoperable: a profile defines a block's interface in terms of datapoint
+ * and property types, attributes and relationships, but also defines the
+ * semantics and the behavior required by the implementation.
+ * That is, implementing a profile begins with the implementing a block which
+ * satisfies the profile's interface requirements, but must include the
+ * implementation of the behavior defined within the profile. For example, a
+ * profile generally expects that assignments to input datapoints or properties
+ * provoke a certain action and that the block's output reflects specific
+ * conditions or measurements and follow timing guidelines defined within the
+ * profile.
+ * This example application demonstrates how to implement blocks satisfying
+ * the profile's interface requirements, but does not implement the blocks'
+ * behavior.
  */
 UFPTiotLoad(load) load[4];	//@izot block external("load"), \
 //@IzoT implement(cpScene, array=3, init={ \
@@ -249,7 +264,7 @@ void onDriverUpdate(const unsigned index, const LonReceiveAddress* const pSource
 {
 	/*
 	 * Because this update event handler is shared among multiple input datapoints,
-	 * we must determine which one received the update. To avoid the search for the
+	 * it determines which one received the update. To avoid the search for the
 	 * matching input datapoint, configure one update event handler for each datapoint.
 	 * You can call a common function from both update event handlers, passing additional
 	 * details such as the affected index into the driver block array, or pointers to

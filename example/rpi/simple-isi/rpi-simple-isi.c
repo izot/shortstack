@@ -104,6 +104,13 @@ SFPTnodeObject(node) nodeObject;    //@IzoT block external("nodeObject"), \
  * This provides date and time through an output datapoint. The application
  * automatically re-sends the current date and time at configurable intervals,
  * which start with a default value assigned to the nciUpdateDate property.
+ *
+ * Note that the implementation of the SFPTrealTimeKeeper profile is incomplete
+ * and not interoperable.
+ * This example application demonstrates how to implement blocks satisfying
+ * the profile's interface requirements, but does not implement the behavior
+ * as required by the profile.
+ */
  */
 SFPTrealTimeKeeper(rtc) rtc; 	//@IzoT block external("clock"), \
 //@IzoT implement(nvoTimeDate.nciUpdateRate, init=60) /* 60.0 seconds */

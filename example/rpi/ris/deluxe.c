@@ -41,6 +41,14 @@ SFPTnodeObject(node) nodeObject;    //@IzoT block external("nodeObject"), \
 //@IzoT implement(nciLocation), implement (nciNetConfig), \
 //@IzoT implement(nciDevMajVer, init=1), implement(nciDevMinVer, init=0)
 
+/*
+ * Note that the implementation of the SFPTco2Sensor profile is incomplete
+ * and not interoperable.
+ * This example application demonstrates how to implement blocks satisfying
+ * the profile's interface requirements, but does not implement the behavior
+ * as required by the profile.
+ */
+
 SFPTco2Sensor(deluxe) deluxeCO2[4];		//@IzoT block external("CO2"), \
 //@IzoT implement(nvoCO2ppm.nciCO2Offset)
 

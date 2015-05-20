@@ -39,6 +39,13 @@
  * includes nothing but a single simple CO2 sensor block. Because this
  * application implements only a single block, an implementation of a
  * node object is not required.
+ *
+ * Note that the implementation of the SFPTco2Sensor profile is incomplete
+ * and not interoperable.
+ * This example application demonstrates how to implement blocks satisfying
+ * the profile's interface requirements, but does not implement the behavior
+ * as required by the profile.
+ */
  */
 SFPTco2Sensor(regular)	regularCO2;	//@IzoT block external("CO2")
 
