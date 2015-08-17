@@ -902,7 +902,11 @@ static void* SioThread(void* arg)
         if (selected == 0) {
             /*
              * Timeout. We use this to implement various timeouts based on this
-             * 1s ticker.
+             * 10 ms ticker. Arguably this time base is not reliable, because a
+             * very busy device may rarely see a select() call timing out.
+             * However, a device busy sending and receiving data will not be
+             * suffering from timeout conditions, so this consideration is more
+             * of an academic nature.
              */
             Uplink(rpi, TEV_Tick);
             Downlink(rpi, TEV_Tick);
