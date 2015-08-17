@@ -1,5 +1,4 @@
 /*
-/*
  * IzoT ShortStack for Raspberry Pi Example code.
  *
  * gpio.c provides a few routines for general-purpose I/O with the
