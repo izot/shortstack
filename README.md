@@ -4,8 +4,8 @@ IzoT (tm) ShortStack Development Kit Release 4.30
 Product Documentation
 ---------------------
 
-Please refer to the *ShortStack User's Guide* for detailed product 
-documentation.
+Please refer to the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01A_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide") for detailed product 
+documentation. 
 
 
 Installation
