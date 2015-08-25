@@ -71,7 +71,6 @@
  */
 SFPTnodeObject(node) nodeObject;    //@IzoT block external("nodeObject"), \
 //@IzoT onUpdate(nviRequest, onNviRequest),\
-//@IzoT implement(nciLocation), implement (nciNetConfig), \
 //@IzoT implement(nciDevMajVer, init=1), implement(nciDevMinVer, init=0)
 
 SFPTclosedLoopActuator(volt, SNVT_volt) driver[2];  //@izot block external("volts"), \

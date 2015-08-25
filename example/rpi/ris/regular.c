@@ -46,6 +46,5 @@
  * the profile's interface requirements, but does not implement the behavior
  * as required by the profile.
  */
- */
 SFPTco2Sensor(regular)	regularCO2;	//@IzoT block external("CO2")
 

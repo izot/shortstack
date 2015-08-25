@@ -309,3 +309,21 @@ const unsigned LonGetCurrentNvSize(const unsigned nvIndex)
 	}
     return result;
 }
+
+extern void* regularLonGetFile(int fileIndex, unsigned* pSize);
+extern void* deluxeLonGetFile(int fileIndex, unsigned* pSize);
+
+void* LonGetFile(int fileIndex, unsigned* pSize) {
+	void* result = NULL;
+
+	switch(interfaceId) {
+	case INTERFACE_REGULAR:
+		result = regularLonGetFile(fileIndex, pSize);
+		break;
+	case INTERFACE_DELUXE:
+		result = deluxeLonGetFile(fileIndex, pSize);
+		break;
+	}
+	return result;
+}
+

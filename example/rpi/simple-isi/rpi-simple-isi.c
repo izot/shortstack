@@ -111,7 +111,6 @@ SFPTnodeObject(node) nodeObject;    //@IzoT block external("nodeObject"), \
  * the profile's interface requirements, but does not implement the behavior
  * as required by the profile.
  */
- */
 SFPTrealTimeKeeper(rtc) rtc; 	//@IzoT block external("clock"), \
 //@IzoT implement(nvoTimeDate.nciUpdateRate, init=60) /* 60.0 seconds */
 
