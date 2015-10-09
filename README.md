@@ -64,6 +64,9 @@ images to support requirements not met by any of the standard Micro Servers.
 Note that construction of custom ShortStack Micro Servers requires that you
 have a licensed copy of Echelon IzoT NodeBuilder installed. 
 
+**microserver/firmware**
+contains updated Neuron firmware for use with some Neuron Chips or Smart Transceivers. Please see the README.md file within for detailed insstructions.
+
 **example**
 contains a set of examples for a number of applications and targets. Each 
 example includes example-specific documentation. The examples are configured to
