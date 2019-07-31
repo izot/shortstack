@@ -1,4 +1,4 @@
-# IzoT SHORTSTACK SOFTWARE DEVELOPER'S KIT LICENSE AGREEMENT #
+# IzoT SHORTSTACK SDK LICENSE AGREEMENT #
 
 This ("Agreement") is entered into between you ("Licensee") and Adesto Technologies Corporation ("Adesto") and governs the authorized use and license to Adesto’s IzoT ShortStack Software Developer’s Kit (the “ShortStack SDK”). If you are entering into this Agreement on behalf of a company or other legal entity, you represent that you have the right to bind that entity to this Agreement, and all reference to Licensee refers both to you and such entity. YOU MUST READ AND AGREE TO THE TERMS OF THIS AGREEMENT BEFORE USING THE ShortStack SDK. BY CLICKING THE "ACCEPT" BUTTON OF THIS AGREEMENT, OR BY USING AND PORTION OF THE ShortStack SDK, YOU AGREE, ON BEHALF OF YOURSELF OR THE ENTITY THAT YOU REPRESENT, TO BE BOUND BY THE TERMS AND CONDITIONS OF THIS AGREEMENT.  IF YOU DO NOT AGREE WITH THE TERMS AND CONDITIONS OF THIS AGREEMENT, PLEASE EXIT THIS PAGE AND DO NOT DOWNLOAD, COPY OR USE THE SHORTSTACK SDK.  
 
