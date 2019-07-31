@@ -4,15 +4,13 @@ IzoT (tm) ShortStack Development Kit Release 4.30
 Product Documentation
 ---------------------
 
-Please refer to the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01B_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide") for detailed product 
-documentation. 
+Adesto’s IzoT ShortStack® Software Development Kit (SDK) enables anyproduct that contains a microprocessor or microcontroller to quickly and inexpensively become a networked and Internet connected smart device. The ShortStack Micro Server provides a simple way to add LON/IP and native LON networking to new or existing smart devices. The IzoT ShortStack SDK is easy to use due to a simple host API, a simple driver, a simple hardware interface, a small host memory footprint, and comprehensive tool support.  See the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01B_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide") for further documentation. 
 
 
 Installation
 ------------
 
-Clone this repository, then review the installation instructions and 
-other considerations in the *ShortStack Users' Guide*.
+Clone this repository, then review the installation instructions in the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01B_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide").
 
 
 
@@ -24,7 +22,7 @@ are tagged as **vM.NN**, where *M* and *N* are the mmajor and minor
 version numbers, respectively. 
 
 The first release of IzoT ShortStack to be hosted with github.com is version
-4.30, so the first stable release will be tagged **v4.30**.
+4.30, so the first stable release is tagged **v4.30**.
 
 Revisions between stable releases should be considered experimental or under 
 development.
@@ -102,4 +100,4 @@ Use of this code is subject to your compliance with the terms of the
 Echelon IzoT(tm) Software Developer's Kit License Agreement which is
 available in the **LICENSE.md** file in your **shortstack** directory.
 
-Copyright © 2002-2015 Echelon Corporation. Echelon, LON, the Echelon logo, LonWorks, NodeBuilder, LonTalk, LonPoint, Neuron, 3120, 3150, LNS, i.LON, ShortStack, Pyxos, LonMaker, IzoT, LonLink, LonResponse, LonSupport, OpenLDV, LonScanner, and LonBridge are trademarks of Echelon Corporation that may be registered in the United States and other countries. For a complete list of registered trademarks see the Echelon Web site at www.echelon.com. All rights reserved.
+Copyright © 2002-2019 Adesto Technologies Corporation. Echelon, LON, the Echelon logo, LonWorks, NodeBuilder, LonTalk, LonPoint, Neuron, 3120, 3150, LNS, i.LON, ShortStack, Pyxos, LonMaker, IzoT, LonLink, LonResponse, LonSupport, OpenLDV, LonScanner, and LonBridge are trademarks of Echelon Corporation that may be registered in the United States and other countries. For a complete list of registered trademarks see the Echelon Web site at www.echelon.com. All rights reserved.
