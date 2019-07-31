@@ -4,7 +4,7 @@
  * Description: This file contains function implementations for the
  * IzoT ShortStack LonTalk Compact API.
  *
- * Copyright (c) Echelon Corporation 2002-2015.  All rights reserved.
+ * Copyright (c) Adesto Technologies Corporation 2002-2019.  All rights reserved.
  *
  * License:
  * Use of the source code contained in this file is subject to the terms
