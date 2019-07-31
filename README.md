@@ -4,7 +4,7 @@ IzoT ShortStack Development Kit 4.3
 Product Documentation
 ---------------------
 
-Adesto’s IzoT ShortStack® Software Development Kit (SDK) enables anyproduct that contains a microprocessor or microcontroller to quickly and inexpensively become a networked and Internet connected smart device. The ShortStack Micro Server provides a simple way to add LON/IP and native LON networking to new or existing smart devices. The IzoT ShortStack SDK is easy to use due to a simple host API, a simple driver, a simple hardware interface, a small host memory footprint, and comprehensive tool support.  See the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01B_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide") for further documentation. 
+Adesto’s IzoT® ShortStack Software Development Kit (SDK) enables anyproduct that contains a microprocessor or microcontroller to quickly and inexpensively become a networked and Internet connected smart device. The ShortStack Micro Server provides a simple way to add LON/IP and native LON networking to new or existing smart devices. The IzoT ShortStack SDK is easy to use due to a simple host API, a simple driver, a simple hardware interface, a small host memory footprint, and comprehensive tool support.  See the [*IzoT ShortStack SDK User's Guide*](http://downloads.echelon.com/support/documentation/manuals/devtools/078-0540-01B_IzoT_ShortStack_SDK_User's_Guide.pdf "IzoT ShortStack SDK User's Guide") for further documentation. 
 
 
 Installation
