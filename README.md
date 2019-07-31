@@ -1,5 +1,5 @@
-IzoT (tm) ShortStack Development Kit Release 4.30
-=================================================
+IzoT ShortStack Development Kit 4.3
+===================================
 
 Product Documentation
 ---------------------
