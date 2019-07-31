@@ -97,7 +97,7 @@ Copyright and License
 ---------------------
 
 Use of this code is subject to your compliance with the terms of the
-Echelon IzoT(tm) Software Developer's Kit License Agreement which is
+Adesto IzoT ShortStack Software Developer's Kit License Agreement which is
 available in the **LICENSE.md** file in your **shortstack** directory.
 
 Copyright © 2002-2019 Adesto Technologies Corporation. Echelon, LON, the Echelon logo, LonWorks, NodeBuilder, LonTalk, LonPoint, Neuron, 3120, 3150, LNS, i.LON, ShortStack, Pyxos, LonMaker, IzoT, LonLink, LonResponse, LonSupport, OpenLDV, LonScanner, and LonBridge are trademarks of Echelon Corporation that may be registered in the United States and other countries. For a complete list of registered trademarks see the Echelon Web site at www.echelon.com. All rights reserved.
