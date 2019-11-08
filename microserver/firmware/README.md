@@ -10,7 +10,7 @@ Alternatively, you can prepare your FT 6050 Smart Transceiver over the network f
 
 If you do not already have a current version of NodeLoad or NodeUtil, download and install one of the utilities from www.echelon.com/downloads.  If you are downloading NodeUtil, also download the latest NodeUtil Node Utility User’s Guide.  NodeLoad is easier to use for just downloading images to device, whereas NodeUtil provides other useful tools for device developers, including tools for verifying Neuron firmware version numbers.
 
-2.	Download the bla60000.ndl file with NodeLoad or NodeUtil into your FT 6050 Smart Transceiver.
+2.	Download the bla6000.ndl file with NodeLoad or NodeUtil into your FT 6050 Smart Transceiver.
 
 You find this file in the microserver/firmware/ver21 folder within your IzoT ShortStack repository.
 
