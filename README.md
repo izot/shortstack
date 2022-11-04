@@ -4,13 +4,13 @@ IzoT ShortStack Development Kit 4.3
 Product Documentation
 ---------------------
 
-Dialog’s IzoT® ShortStack Software Development Kit (SDK) enables anyproduct that contains a microprocessor or microcontroller to quickly and inexpensively become a networked and Internet connected smart device. The ShortStack Micro Server provides a simple way to add LON/IP and native LON networking to new or existing smart devices. The IzoT ShortStack SDK is easy to use due to a simple host API, a simple driver, a simple hardware interface, a small host memory footprint, and comprehensive tool support.  Documentation is available at http://iecdocs.renesas.com. 
+EnOcean’s IzoT ShortStack Software Development Kit (SDK) enables anyproduct that contains a microprocessor or microcontroller to quickly and inexpensively become a networked and Internet connected smart device. The ShortStack Micro Server provides a simple way to add LON/IP and native LON networking to new or existing smart devices. The IzoT ShortStack SDK is easy to use due to a simple host API, a simple driver, a simple hardware interface, a small host memory footprint, and comprehensive tool support.  Documentation is available at https://edgedocs.enocean.com. 
 
 
 Installation
 ------------
 
-Clone this repository, then review the installation instructions available at http://iecdocs.renesas.com.
+Clone this repository, then review the installation instructions available at https://edgedocs.enocean.com.
 
 
 Change History
@@ -99,4 +99,4 @@ Use of this code is subject to your compliance with the terms of the
 Adesto IzoT ShortStack Software Developer's Kit License Agreement which is
 available in the **LICENSE.md** file in your **shortstack** directory.
 
-Copyright © 2002-2019 Adesto Technologies Corporation. Echelon, LON, the Echelon logo, LonWorks, NodeBuilder, LonTalk, LonPoint, Neuron, 3120, 3150, LNS, i.LON, ShortStack, Pyxos, LonMaker, IzoT, LonLink, LonResponse, LonSupport, OpenLDV, LonScanner, and LonBridge are trademarks of Echelon Corporation that may be registered in the United States and other countries. For a complete list of registered trademarks see the Adesto Web site at www.adestotech.com. All rights reserved.
+Copyright © 2002-2022 EnOcean GmbH. EnOcean, LON, the EnOcean logo, LonWorks, LonTalk, LNS, i.LON, ShortStack, LonMaker, IzoT, LonLink, OpenLDV, LonScanner, and LonBridge are trademarks of EnOcean GmbH that may be registered in the United States and other countries. For a complete list of registered trademarks see www.enocean.com. All rights reserved.
